@@ -6,208 +6,203 @@
 <title>QR Attendance — KFU & SPbU Egypt</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  :root {
-    --bg: #f5f5f3;
-    --surface: #ffffff;
-    --surface2: #f0efeb;
-    --border: #e2e1dc;
-    --border-strong: #ccc9c0;
-    --text: #1a1a18;
-    --text2: #6b6a65;
-    --text3: #9e9d97;
-    --accent: #185FA5;
-    --accent-bg: #e6f1fb;
-    --accent-text: #0c447c;
-    --success: #3B6D11;
-    --success-bg: #eaf3de;
-    --success-text: #27500a;
-    --warn: #854F0B;
-    --warn-bg: #faeeda;
-    --warn-text: #633806;
-    --danger: #A32D2D;
-    --danger-bg: #fcebeb;
-    --danger-text: #791f1f;
-    --purple: #534AB7;
-    --purple-bg: #eeedfe;
-    --purple-text: #3c3489;
-    --radius: 8px;
-    --mono: 'Courier New', monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111110;
-      --surface: #1e1e1c;
-      --surface2: #2a2a28;
-      --border: #333330;
-      --border-strong: #444440;
-      --text: #f0efeb;
-      --text2: #9e9d97;
-      --text3: #6b6a65;
-      --accent: #378ADD;
-      --accent-bg: #0c2d4a;
-      --accent-text: #85b7eb;
-      --success: #639922;
-      --success-bg: #1a2e09;
-      --success-text: #c0dd97;
-      --warn: #EF9F27;
-      --warn-bg: #2e1f06;
-      --warn-text: #fac775;
-      --danger: #E24B4A;
-      --danger-bg: #2e0d0d;
-      --danger-text: #f09595;
-      --purple: #7F77DD;
-      --purple-bg: #1e1b3a;
-      --purple-text: #afa9ec;
-    }
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; min-height: 100vh; }
-  a { color: var(--accent); }
+:root{
+  --bg:#f5f5f3;--surface:#ffffff;--surface2:#f0efeb;--border:#e2e1dc;--border-strong:#ccc9c0;
+  --text:#1a1a18;--text2:#6b6a65;--text3:#9e9d97;
+  --accent:#185FA5;--accent-bg:#e6f1fb;--accent-text:#0c447c;
+  --success:#3B6D11;--success-bg:#eaf3de;--success-text:#27500a;
+  --warn:#854F0B;--warn-bg:#faeeda;--warn-text:#633806;
+  --danger:#A32D2D;--danger-bg:#fcebeb;--danger-text:#791f1f;
+  --radius:8px;--mono:'Courier New',monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#111110;--surface:#1e1e1c;--surface2:#2a2a28;--border:#333330;--border-strong:#444440;
+  --text:#f0efeb;--text2:#9e9d97;--text3:#6b6a65;
+  --accent:#378ADD;--accent-bg:#0c2d4a;--accent-text:#85b7eb;
+  --success:#639922;--success-bg:#1a2e09;--success-text:#c0dd97;
+  --warn:#EF9F27;--warn-bg:#2e1f06;--warn-text:#fac775;
+  --danger:#E24B4A;--danger-bg:#2e0d0d;--danger-text:#f09595;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;min-height:100vh}
 
-  /* Layout */
-  .shell { display: flex; min-height: 100vh; }
-  .sidebar { width: 220px; background: var(--surface); border-right: 0.5px solid var(--border); padding: 1.25rem 0; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
-  .main { flex: 1; padding: 1.5rem; max-width: 860px; }
-  @media (max-width: 640px) {
-    .shell { flex-direction: column; }
-    .sidebar { width: 100%; height: auto; position: static; padding: .5rem; display: flex; gap: 4px; overflow-x: auto; border-right: none; border-bottom: 0.5px solid var(--border); }
-    .sidebar .logo { display: none; }
-    .sidebar .nav-section-label { display: none; }
-    .nav-item { padding: 7px 10px; white-space: nowrap; font-size: 12px; }
-    .main { padding: 1rem; }
-  }
+/* ── LAYOUT ── */
+.shell{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--surface);border-right:.5px solid var(--border);padding:1.25rem 0;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.main{flex:1;padding:1.5rem;max-width:860px}
+@media(max-width:640px){
+  .shell{flex-direction:column}
+  .sidebar{width:100%;height:auto;position:static;padding:.5rem;display:flex;gap:4px;overflow-x:auto;border-right:none;border-bottom:.5px solid var(--border)}
+  .sidebar .logo,.nav-section-label{display:none}
+  .nav-item{padding:7px 10px;white-space:nowrap;font-size:12px}
+  .main{padding:1rem}
+}
+.logo{padding:0 1.1rem 1rem;border-bottom:.5px solid var(--border);margin-bottom:.75rem}
+.logo-title{font-size:14px;font-weight:600}
+.logo-sub{font-size:11px;color:var(--text2);margin-top:2px}
+.nav-section-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:.75rem 1.1rem .3rem}
+.nav-item{display:flex;align-items:center;gap:9px;padding:7px 1.1rem;cursor:pointer;color:var(--text2);font-size:13px;border:none;background:transparent;width:100%;text-align:left;font-family:inherit;transition:background .12s,color .12s}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item.on{background:var(--accent-bg);color:var(--accent-text);font-weight:500}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0;margin-left:auto;display:none}
+.nav-item.live .nav-dot{display:block}
+.pg{display:none}.pg.on{display:block}
 
-  .logo { padding: 0 1.1rem 1rem; border-bottom: 0.5px solid var(--border); margin-bottom: .75rem; }
-  .logo-title { font-size: 14px; font-weight: 600; color: var(--text); }
-  .logo-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+/* ── GENERIC ── */
+.page-head{margin-bottom:1.25rem}
+.page-title{font-size:20px;font-weight:600}
+.page-sub{font-size:13px;color:var(--text2);margin-top:3px}
+.card{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem}
+.card+.card{margin-top:10px}
+.section-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:1.25rem}
+.stat{background:var(--surface2);border-radius:var(--radius);padding:10px 12px}
+.stat-n{font-size:22px;font-weight:600}
+.stat-l{font-size:11px;color:var(--text2);margin-top:2px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:var(--radius);border:.5px solid var(--border-strong);background:transparent;cursor:pointer;font-size:13px;color:var(--text);font-family:inherit;transition:background .12s}
+.btn:hover{background:var(--surface2)}
+.btn-p{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-p:hover{opacity:.9;background:var(--accent)}
+.btn-d{color:var(--danger);border-color:var(--danger-bg)}.btn-d:hover{background:var(--danger-bg)}
+.btn-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.big-btn{width:100%;padding:12px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px;transition:opacity .12s}
+.big-btn:hover{opacity:.9}
+.big-btn:disabled{opacity:.5;cursor:not-allowed}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12px;color:var(--text2);margin-bottom:4px}
+input[type=text]{width:100%;padding:9px 12px;border:.5px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:15px;font-family:inherit}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit}
+.search-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.alert{padding:9px 13px;border-radius:var(--radius);font-size:13px;margin-bottom:12px;display:none}
+.alert.on{display:block}
+.alert-err{background:var(--danger-bg);color:var(--danger-text);border:.5px solid var(--danger)}
+.alert-warn{background:var(--warn-bg);color:var(--warn-text);border:.5px solid var(--warn)}
+.alert-ok{background:var(--success-bg);color:var(--success-text);border:.5px solid var(--success)}
 
-  .nav-section-label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .07em; padding: .75rem 1.1rem .3rem; }
-  .nav-item { display: flex; align-items: center; gap: 9px; padding: 7px 1.1rem; cursor: pointer; color: var(--text2); font-size: 13px; border-radius: 0; transition: background .12s, color .12s; border: none; background: transparent; width: 100%; text-align: left; font-family: inherit; }
-  .nav-item:hover { background: var(--surface2); color: var(--text); }
-  .nav-item.on { background: var(--accent-bg); color: var(--accent-text); font-weight: 500; }
-  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; margin-left: auto; display: none; }
-  .nav-item.live .nav-dot { display: block; }
+/* ── ADMIN ── */
+.course-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.ccard{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:border-color .13s}
+.ccard:hover{border-color:var(--border-strong)}
+.ccard.sel{border-width:2px}
+.ccard-icon{font-size:22px;margin-bottom:7px}
+.ccard-name{font-size:14px;font-weight:600}
+.ccard-meta{font-size:12px;color:var(--text2);margin-top:3px}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--success);margin-right:4px;vertical-align:middle}
+.qr-inner{display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap}
+.qr-right{flex:1;min-width:160px}
+.kv{display:flex;gap:8px;font-size:12px;margin-bottom:6px}
+.kk{color:var(--text2);min-width:70px;flex-shrink:0}
+.vv{font-weight:500}
+.recent-scan{font-size:12px;padding:5px 8px;background:var(--surface2);border-radius:var(--radius);margin-bottom:3px;display:flex;gap:8px;align-items:center}
+.rs-name{font-weight:500;flex:1}
+.rs-time{font-family:var(--mono);color:var(--text3);font-size:11px}
 
-  .pg { display: none; } .pg.on { display: block; }
+/* ── SETUP SCREEN ── */
+.setup-wrap{max-width:480px}
+.setup-step{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:10px}
+.setup-step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;margin-right:8px;flex-shrink:0}
+.setup-step-title{font-weight:600;font-size:14px;display:flex;align-items:center;margin-bottom:6px}
+.setup-step-body{font-size:13px;color:var(--text2);line-height:1.6;padding-left:32px}
+.setup-step-body a{color:var(--accent)}
+.setup-key-input{display:flex;gap:8px;margin-top:10px;padding-left:32px}
+.setup-key-input input{flex:1}
 
-  /* Page header */
-  .page-head { margin-bottom: 1.25rem; }
-  .page-title { font-size: 20px; font-weight: 600; }
-  .page-sub { font-size: 13px; color: var(--text2); margin-top: 3px; }
+/* ── STUDENT CHECK-IN (clean) ── */
+.ci-page{min-height:100vh;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.ci-box{background:var(--surface);border:.5px solid var(--border);border-radius:16px;padding:2rem 1.75rem;width:100%;max-width:380px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.ci-logo{text-align:center;margin-bottom:1.5rem}
+.ci-logo-icon{font-size:36px;margin-bottom:6px}
+.ci-logo-title{font-size:18px;font-weight:700;margin-bottom:2px}
+.ci-logo-sub{font-size:13px;color:var(--text2)}
+.lec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px}
+.lec-btn{padding:10px 4px;border:.5px solid var(--border);border-radius:var(--radius);background:var(--surface2);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;color:var(--text2);transition:all .12s;text-align:center}
+.lec-btn:hover,.lec-btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.att-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.att-pip{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.success-wrap{display:none;text-align:center}
+.success-wrap.on{display:block}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Cards */
-  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; }
-  .card + .card { margin-top: 10px; }
+/* ── LOG ── */
+.log-day-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;padding:6px 0 4px;border-bottom:.5px solid var(--border);margin-bottom:6px;margin-top:16px}
+.log-entry{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--radius);background:var(--surface);border:.5px solid var(--border);margin-bottom:4px}
+.log-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.log-name{font-size:13px;font-weight:500}
+.log-detail{font-size:11px;color:var(--text2);margin-top:1px}
+.log-lec{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--surface2);border:.5px solid var(--border);flex-shrink:0}
+.log-time{font-size:11px;color:var(--text3);font-family:var(--mono);flex-shrink:0}
 
-  /* Stat grid */
-  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-bottom: 1.25rem; }
-  .stat { background: var(--surface2); border-radius: var(--radius); padding: 10px 12px; }
-  .stat-n { font-size: 22px; font-weight: 600; }
-  .stat-l { font-size: 11px; color: var(--text2); margin-top: 2px; }
+/* ── REPORT ── */
+.stu-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius);background:var(--surface);border:.5px solid var(--border);margin-bottom:4px;cursor:pointer;transition:border-color .13s}
+.stu-row:hover{border-color:var(--border-strong)}
+.stu-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.stu-name{font-size:13px;font-weight:500}
+.stu-meta{font-size:11px;color:var(--text2);margin-top:1px}
+.stu-pips{display:flex;gap:3px;margin-top:4px}
+.stu-pip{width:15px;height:15px;border-radius:3px;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.stu-detail{display:none;padding:10px 12px;background:var(--surface2);border:.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);margin-top:-4px;margin-bottom:4px}
+.stu-detail.on{display:block}
+.de-entry{display:flex;gap:10px;font-size:12px;padding:4px 6px;background:var(--surface);border-radius:4px;margin-bottom:3px}
+.de-lec{font-weight:700;color:var(--text2);min-width:44px}
+.de-date{flex:1;color:var(--text2)}
+.de-time{font-family:var(--mono);color:var(--text3)}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--text2)}
+.empty-icon{font-size:36px;margin-bottom:10px}
 
-  /* Buttons */
-  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: var(--radius); border: 0.5px solid var(--border-strong); background: transparent; cursor: pointer; font-size: 13px; color: var(--text); font-family: inherit; transition: background .12s; }
-  .btn:hover { background: var(--surface2); }
-  .btn-p { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .btn-p:hover { opacity: .9; background: var(--accent); }
-  .btn-d { color: var(--danger); border-color: var(--danger-bg); }
-  .btn-d:hover { background: var(--danger-bg); }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
-  .big-btn { width: 100%; padding: 11px; border-radius: var(--radius); border: none; background: var(--accent); color: #fff; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; margin-top: 4px; }
-  .big-btn:hover { opacity: .9; }
-
-  /* Forms */
-  .field { margin-bottom: 10px; }
-  .field label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
-  input[type=text] { width: 100%; padding: 8px 11px; border: 0.5px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 14px; font-family: inherit; }
-  input[type=text]:focus { outline: none; border-color: var(--accent); }
-  select { padding: 7px 10px; border: 0.5px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 13px; font-family: inherit; }
-  .search-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
-
-  /* Alerts */
-  .alert { padding: 8px 12px; border-radius: var(--radius); font-size: 13px; margin-bottom: 10px; display: none; }
-  .alert.on { display: block; }
-  .alert-err { background: var(--danger-bg); color: var(--danger-text); border: 0.5px solid var(--danger); }
-  .alert-warn { background: var(--warn-bg); color: var(--warn-text); border: 0.5px solid var(--warn); }
-  .alert-ok { background: var(--success-bg); color: var(--success-text); border: 0.5px solid var(--success); }
-
-  /* Course grid */
-  .course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
-  .ccard { background: var(--surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 14px; cursor: pointer; transition: border-color .13s; }
-  .ccard:hover { border-color: var(--border-strong); }
-  .ccard.sel { border-width: 2px; }
-  .ccard-icon { font-size: 22px; margin-bottom: 7px; }
-  .ccard-name { font-size: 14px; font-weight: 600; }
-  .ccard-meta { font-size: 12px; color: var(--text2); margin-top: 3px; }
-  .live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--success); margin-right: 4px; vertical-align: middle; }
-  .section-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
-
-  /* QR panel */
-  .qr-inner { display: flex; gap: 1.25rem; align-items: flex-start; flex-wrap: wrap; }
-  canvas.qrc { border-radius: 8px; border: 0.5px solid var(--border); flex-shrink: 0; background: #fff; }
-  .qr-right { flex: 1; min-width: 160px; }
-  .kv { display: flex; gap: 8px; font-size: 12px; margin-bottom: 6px; }
-  .kk { color: var(--text2); min-width: 70px; flex-shrink: 0; }
-  .vv { font-weight: 500; }
-  .recent-scan { font-size: 12px; padding: 5px 8px; background: var(--surface2); border-radius: var(--radius); margin-bottom: 3px; display: flex; gap: 8px; align-items: center; }
-  .rs-name { font-weight: 500; flex: 1; }
-  .rs-time { font-family: var(--mono); color: var(--text3); font-size: 11px; }
-
-  /* Lec buttons */
-  .lec-grid { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-  .lec-btn { padding: 6px 12px; border: 0.5px solid var(--border); border-radius: var(--radius); background: var(--surface2); cursor: pointer; font-size: 13px; font-family: inherit; color: var(--text2); transition: all .12s; }
-  .lec-btn:hover, .lec-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  /* Check-in page */
-  .ci-wrap { max-width: 400px; margin: 0 auto; }
-  .ci-header { text-align: center; margin-bottom: 1.25rem; }
-  .ci-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 26px; }
-  .ci-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-  .ci-sub { font-size: 13px; color: var(--text2); }
-  .pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
-  .pick-opt { padding: 11px 13px; border: 0.5px solid var(--border); border-radius: var(--radius); background: var(--surface); cursor: pointer; transition: all .12s; }
-  .pick-opt:hover { border-color: var(--accent); background: var(--accent-bg); }
-  .pick-uni { font-size: 11px; color: var(--text2); margin-bottom: 3px; }
-  .pick-course { font-size: 13px; font-weight: 600; }
-  .success-wrap { display: none; text-align: center; }
-  .success-wrap.on { display: block; }
-  .att-row { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
-  .att-pip { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
-
-  /* Log */
-  .log-day-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; padding: 6px 0 4px; border-bottom: 0.5px solid var(--border); margin-bottom: 6px; margin-top: 16px; }
-  .log-entry { display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: var(--radius); background: var(--surface); border: 0.5px solid var(--border); margin-bottom: 4px; }
-  .log-av { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
-  .log-name { font-size: 13px; font-weight: 500; }
-  .log-detail { font-size: 11px; color: var(--text2); margin-top: 1px; }
-  .log-lec { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--surface2); border: 0.5px solid var(--border); flex-shrink: 0; }
-  .log-time { font-size: 11px; color: var(--text3); font-family: var(--mono); flex-shrink: 0; }
-
-  /* Report */
-  .stu-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius); background: var(--surface); border: 0.5px solid var(--border); margin-bottom: 4px; cursor: pointer; transition: border-color .13s; }
-  .stu-row:hover { border-color: var(--border-strong); }
-  .stu-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
-  .stu-name { font-size: 13px; font-weight: 500; }
-  .stu-meta { font-size: 11px; color: var(--text2); margin-top: 1px; }
-  .stu-pips { display: flex; gap: 3px; margin-top: 4px; }
-  .stu-pip { width: 15px; height: 15px; border-radius: 3px; font-size: 9px; display: flex; align-items: center; justify-content: center; font-weight: 600; }
-  .stu-detail { display: none; padding: 10px 12px; background: var(--surface2); border: 0.5px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); margin-top: -4px; margin-bottom: 4px; }
-  .stu-detail.on { display: block; }
-  .de-entry { display: flex; gap: 10px; font-size: 12px; padding: 4px 6px; background: var(--surface); border-radius: 4px; margin-bottom: 3px; }
-  .de-lec { font-weight: 600; color: var(--text2); min-width: 44px; }
-  .de-date { flex: 1; color: var(--text2); }
-  .de-time { font-family: var(--mono); color: var(--text3); }
-
-  /* Export */
-  .export-area { background: var(--surface2); border-radius: var(--radius); padding: .75rem 1rem; font-size: 12px; font-family: var(--mono); white-space: pre-wrap; word-break: break-all; max-height: 200px; overflow-y: auto; margin-top: 10px; border: 0.5px solid var(--border); }
-  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text2); }
-  .empty-icon { font-size: 36px; margin-bottom: 10px; }
+/* ── EXPORT ── */
+.export-area{background:var(--surface2);border-radius:var(--radius);padding:.75rem 1rem;font-size:12px;font-family:var(--mono);white-space:pre-wrap;word-break:break-all;max-height:200px;overflow-y:auto;margin-top:10px;border:.5px solid var(--border)}
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════════
+     STUDENT CHECK-IN VIEW (shown when ?course=xxx)
+════════════════════════════════════════════════ -->
+<div id="student-view" style="display:none">
+  <div class="ci-page">
+    <div class="ci-box">
+      <div class="ci-logo">
+        <div class="ci-logo-icon" id="ci-course-icon">📋</div>
+        <div class="ci-logo-title" id="ci-course-name">Attendance</div>
+        <div class="ci-logo-sub" id="ci-course-uni"></div>
+      </div>
+
+      <!-- Form -->
+      <div id="ci-form">
+        <div class="alert alert-err" id="ci-err"></div>
+        <div class="alert alert-warn" id="ci-warn"></div>
+        <div class="field">
+          <label for="ci-name">Your full name</label>
+          <input type="text" id="ci-name" placeholder="Ahmed Mohamed" maxlength="60" autocomplete="name"/>
+        </div>
+        <div class="field">
+          <label>Select lecture</label>
+          <div class="lec-grid" id="ci-lecs"></div>
+        </div>
+        <button class="big-btn" id="ci-submit-btn" onclick="doCheckin()">Mark attendance</button>
+      </div>
+
+      <!-- Success -->
+      <div class="success-wrap" id="ci-success">
+        <div style="font-size:52px;margin-bottom:10px">✅</div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:6px" id="suc-title">Done!</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:14px" id="suc-sub"></div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Your attendance</div>
+        <div class="att-row" id="suc-att"></div>
+        <button class="btn" style="margin-top:1.25rem;width:100%;justify-content:center" onclick="resetCI()">↩ Check in someone else</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ADMIN VIEW
+════════════════════════════════════════════════ -->
+<div id="admin-view" style="display:none">
 <div class="shell">
-  <nav class="sidebar" id="sidebar">
+  <nav class="sidebar">
     <div class="logo">
       <div class="logo-title">📋 Attendance</div>
       <div class="logo-sub">KFU & SPbU Egypt</div>
@@ -216,11 +211,6 @@
     <button class="nav-item on" onclick="nav('admin')" id="nav-admin">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       QR codes
-    </button>
-    <div class="nav-section-label">Live</div>
-    <button class="nav-item" onclick="nav('checkin')" id="nav-checkin">
-      <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      Student check-in
     </button>
     <div class="nav-section-label">Data</div>
     <button class="nav-item" onclick="nav('log')" id="nav-log">
@@ -236,66 +226,33 @@
       <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Export / backup
     </button>
+    <div class="nav-section-label" style="margin-top:auto">Settings</div>
+    <button class="nav-item" onclick="nav('setup')" id="nav-setup">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Setup / API key
+    </button>
   </nav>
 
   <main class="main">
-    <!-- ADMIN -->
+
+    <!-- ADMIN / QR -->
     <div class="pg on" id="pg-admin">
       <div class="page-head">
         <div class="page-title">QR codes</div>
-        <div class="page-sub">Select a course to see its QR code, then download and print it.</div>
+        <div class="page-sub">Select a course to view its QR code, then download and print it.</div>
       </div>
-      <div class="section-label" style="margin-bottom:8px">Kazan Federal University — Egypt</div>
+      <div class="section-label">Kazan Federal University — Egypt</div>
       <div class="course-grid" id="kfu-cards"></div>
-      <div class="section-label" style="margin-bottom:8px;margin-top:1rem">Saint Petersburg University — Egypt</div>
+      <div class="section-label" style="margin-top:1rem">Saint Petersburg University — Egypt</div>
       <div class="course-grid" id="spbu-cards"></div>
       <div id="qr-area" style="margin-top:1rem"></div>
-    </div>
-
-    <!-- CHECK-IN -->
-    <div class="pg" id="pg-checkin">
-      <div class="ci-wrap">
-        <div id="ci-picker">
-          <div class="ci-header">
-            <div class="ci-icon" style="background:#f0efeb">📱</div>
-            <div class="ci-title">Student check-in</div>
-            <div class="ci-sub">Pick your course to get started</div>
-          </div>
-          <div class="section-label">Kazan Federal University</div>
-          <div class="pick-grid" id="pick-kfu"></div>
-          <div class="section-label" style="margin-top:.5rem">Saint Petersburg University</div>
-          <div class="pick-grid" id="pick-spbu"></div>
-        </div>
-        <div id="ci-form" style="display:none">
-          <div class="ci-header">
-            <div class="ci-icon" id="ci-icon" style="background:#e6f1fb">🎓</div>
-            <div class="ci-title" id="ci-course-title">Check in</div>
-            <div class="ci-sub" id="ci-course-sub"></div>
-          </div>
-          <div class="alert alert-err" id="ci-err"></div>
-          <div class="alert alert-warn" id="ci-warn"></div>
-          <div class="field"><label>Full name</label><input type="text" id="ci-name" placeholder="Ahmed Mohamed" maxlength="60"/></div>
-          <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Select lecture</div>
-          <div class="lec-grid" id="ci-lecs"></div>
-          <button class="big-btn" onclick="doCheckin()">Mark attendance</button>
-          <button class="btn" style="width:100%;margin-top:8px;justify-content:center" onclick="showPicker()">← Back to courses</button>
-        </div>
-        <div class="success-wrap" id="ci-success">
-          <div style="font-size:52px;margin-bottom:10px">✅</div>
-          <div class="ci-title" id="suc-title">Attendance marked!</div>
-          <div class="ci-sub" id="suc-sub" style="margin-bottom:12px;line-height:1.6"></div>
-          <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Your attendance — all 8 lectures</div>
-          <div class="att-row" id="suc-att"></div>
-          <button class="btn" style="margin-top:1rem;width:100%;justify-content:center" onclick="showPicker()">↩ Check in someone else</button>
-        </div>
-      </div>
     </div>
 
     <!-- LOG -->
     <div class="pg" id="pg-log">
       <div class="page-head">
         <div class="page-title">Activity log</div>
-        <div class="page-sub">Every scan, with exact date and time.</div>
+        <div class="page-sub">Every scan — exact day and time.</div>
       </div>
       <div class="search-bar">
         <select id="log-uni" onchange="renderLog()">
@@ -306,11 +263,12 @@
         <select id="log-course" onchange="renderLog()"><option value="">All courses</option></select>
         <select id="log-lec" onchange="renderLog()">
           <option value="">All lectures</option>
-          <option value="1">L1</option><option value="2">L2</option><option value="3">L3</option><option value="4">L4</option>
-          <option value="5">L5</option><option value="6">L6</option><option value="7">L7</option><option value="8">L8</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option><option>8</option>
         </select>
         <input type="text" id="log-search" placeholder="Search name…" oninput="renderLog()" style="flex:1;min-width:100px"/>
-        <button class="btn btn-d" onclick="clearLog()">🗑 Clear log</button>
+        <button class="btn" onclick="loadFromCloud().then(renderLog)">↻ Refresh</button>
+        <button class="btn btn-d" onclick="clearLog()">🗑 Clear</button>
       </div>
       <div id="log-body"></div>
     </div>
@@ -319,7 +277,7 @@
     <div class="pg" id="pg-report">
       <div class="page-head">
         <div class="page-title">Attendance report</div>
-        <div class="page-sub">Full overview per student. Click a row to see their scan history.</div>
+        <div class="page-sub">Click a student row to see their full scan history.</div>
       </div>
       <div class="stat-row" id="rep-stats"></div>
       <div class="search-bar">
@@ -330,268 +288,360 @@
         </select>
         <select id="rep-course" onchange="renderReport()"><option value="">All courses</option></select>
         <input type="text" id="rep-search" placeholder="Search name…" oninput="renderReport()" style="flex:1;min-width:100px"/>
+        <button class="btn" onclick="loadFromCloud().then(renderReport)">↻ Refresh</button>
       </div>
       <div id="rep-body"></div>
     </div>
 
     <!-- EXPORT -->
     <div class="pg" id="pg-export">
-      <div class="page-head">
-        <div class="page-title">Export &amp; backup</div>
-        <div class="page-sub">Download all data as a CSV, or back up and restore using JSON.</div>
-      </div>
+      <div class="page-head"><div class="page-title">Export &amp; backup</div></div>
       <div class="card">
         <div style="font-weight:600;margin-bottom:6px">📥 Export to CSV (Excel)</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Downloads a spreadsheet with every student, course, lecture, date, and time.</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Every student, course, lecture, date and time in one spreadsheet.</div>
         <button class="btn btn-p" onclick="exportCSV()">⬇ Download CSV</button>
       </div>
-      <div class="card" style="margin-top:10px">
+      <div class="card">
         <div style="font-weight:600;margin-bottom:6px">💾 Full backup (JSON)</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Save a complete backup of all attendance data. Keep this file safe — you can restore from it later.</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Save and restore all data.</div>
         <div class="btn-row">
           <button class="btn btn-p" onclick="exportJSON()">⬇ Download backup</button>
-          <label class="btn" style="cursor:pointer">📂 Restore backup <input type="file" accept=".json" onchange="importJSON(this)" style="display:none"/></label>
+          <label class="btn" style="cursor:pointer">📂 Restore backup<input type="file" accept=".json" onchange="importJSON(this)" style="display:none"/></label>
         </div>
-        <div class="alert alert-ok" id="import-ok" style="margin-top:10px">Backup restored successfully.</div>
-        <div class="alert alert-err" id="import-err" style="margin-top:10px">Could not read file. Make sure it's a valid backup.</div>
+        <div class="alert alert-ok" id="import-ok" style="margin-top:10px">Backup restored.</div>
+        <div class="alert alert-err" id="import-err" style="margin-top:10px">Could not read file.</div>
       </div>
-      <div class="card" style="margin-top:10px">
+      <div class="card">
         <div style="font-weight:600;margin-bottom:6px">🗑 Danger zone</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Permanently delete all data across all courses. Download a backup first!</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Delete all data permanently. Download a backup first!</div>
         <button class="btn btn-d" onclick="nukeAll()">Delete all data</button>
       </div>
     </div>
+
+    <!-- SETUP -->
+    <div class="pg" id="pg-setup">
+      <div class="page-head">
+        <div class="page-title">Setup</div>
+        <div class="page-sub">Connect a free cloud database so student scans sync to your device in real time.</div>
+      </div>
+      <div class="setup-wrap">
+        <div class="setup-step">
+          <div class="setup-step-title"><span class="setup-step-num">1</span>Create a free JSONBin account</div>
+          <div class="setup-step-body">Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> and click <strong>Sign Up</strong>. It's completely free — no credit card.</div>
+        </div>
+        <div class="setup-step">
+          <div class="setup-step-title"><span class="setup-step-num">2</span>Get your API key</div>
+          <div class="setup-step-body">After signing in, click your profile icon → <strong>API Keys</strong> → copy the key that starts with <code>$2b$</code>.</div>
+        </div>
+        <div class="setup-step">
+          <div class="setup-step-title"><span class="setup-step-num">3</span>Paste it below</div>
+          <div class="setup-key-input">
+            <input type="text" id="api-key-input" placeholder="$2b$10$…" maxlength="80"/>
+            <button class="btn btn-p" onclick="saveAPIKey()">Save</button>
+          </div>
+          <div class="alert alert-ok" id="key-ok" style="margin-top:10px;margin-left:32px">API key saved! Testing connection…</div>
+          <div class="alert alert-err" id="key-err" style="margin-top:10px;margin-left:32px"></div>
+        </div>
+        <div class="setup-step">
+          <div class="setup-step-title"><span class="setup-step-num">4</span>Done — it's automatic from here</div>
+          <div class="setup-step-body">Every student scan will save to the cloud instantly. You can open the admin panel on any device and click <strong>↻ Refresh</strong> to see live attendance.</div>
+        </div>
+        <div id="key-status" style="margin-top:1rem;font-size:13px;color:var(--text2)"></div>
+      </div>
+    </div>
+
   </main>
+</div>
 </div>
 
 <script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
 const UNIS = {
-  kfu: { name: 'Kazan Federal University — Egypt', short: 'KFU',
-    courses: [
-      { id: 'kfu-bio', name: 'Biology', icon: '🧬', bg: '#E1F5EE', tc: '#0F6E56', dark_bg: '#0a2e1e', dark_tc: '#5DCAA5' },
-      { id: 'kfu-eng', name: 'English', icon: '📖', bg: '#E6F1FB', tc: '#185FA5', dark_bg: '#0c2438', dark_tc: '#378ADD' }
+  kfu: { name:'Kazan Federal University — Egypt', short:'KFU',
+    courses:[
+      {id:'kfu-bio', name:'Biology',  icon:'🧬', bg:'#E1F5EE', tc:'#0F6E56'},
+      {id:'kfu-eng', name:'English',  icon:'📖', bg:'#E6F1FB', tc:'#185FA5'}
     ]
   },
-  spbu: { name: 'Saint Petersburg University — Egypt', short: 'SPbU',
-    courses: [
-      { id: 'spbu-sci', name: 'Science', icon: '🔬', bg: '#EEEDFE', tc: '#534AB7', dark_bg: '#1a1830', dark_tc: '#7F77DD' },
-      { id: 'spbu-eng', name: 'English', icon: '📖', bg: '#EAF3DE', tc: '#3B6D11', dark_bg: '#162208', dark_tc: '#97C459' }
+  spbu:{ name:'Saint Petersburg University — Egypt', short:'SPbU',
+    courses:[
+      {id:'spbu-sci', name:'Science', icon:'🔬', bg:'#EEEDFE', tc:'#534AB7'},
+      {id:'spbu-eng', name:'English', icon:'📖', bg:'#EAF3DE', tc:'#3B6D11'}
     ]
   }
 };
-const ALL_COURSES = Object.values(UNIS).flatMap(u => u.courses);
+const ALL_COURSES = Object.values(UNIS).flatMap(u=>u.courses);
 
-let DB = { logs: [], students: {} };
+let DB = {logs:[], students:{}};
 let activeCourse = null;
 let ciCourse = null;
 let ciLec = null;
+let BIN_ID = null;
+const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
 
-function save() { try { localStorage.setItem('qr_uni_v4', JSON.stringify(DB)); } catch(e) {} }
-function load() { try { const d = localStorage.getItem('qr_uni_v4'); if (d) DB = JSON.parse(d); } catch(e) {} }
-load();
+// ── helpers ──
+function lsGet(k){ try{return localStorage.getItem(k)}catch(e){return null} }
+function lsSet(k,v){ try{localStorage.setItem(k,v)}catch(e){} }
+function getAPIKey(){ return lsGet('qr_apikey') || '' }
+function getCourse(id){ return ALL_COURSES.find(c=>c.id===id) }
+function getUniKey(cid){ return Object.keys(UNIS).find(k=>UNIS[k].courses.find(c=>c.id===cid)) }
+function getUni(cid){ return UNIS[getUniKey(cid)] }
+function initials(n){ return n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase() }
+function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'}) }
+function fmtTime(iso){ return new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) }
+function dayKey(iso){ return new Date(iso).toDateString() }
+function saveLoc(){ lsSet('qr_uni_v5', JSON.stringify(DB)) }
+function loadLoc(){ try{const d=lsGet('qr_uni_v5');if(d)DB=JSON.parse(d)}catch(e){} }
 
-function getCourse(id) { return ALL_COURSES.find(c => c.id === id); }
-function getUniKey(cid) { return Object.keys(UNIS).find(k => UNIS[k].courses.find(c => c.id === cid)); }
-function getUni(cid) { const k = getUniKey(cid); return UNIS[k]; }
-function initials(n) { return n.trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase(); }
-function fmtDate(iso) { return new Date(iso).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }); }
-function fmtTime(iso) { return new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
-function dayKey(iso) { return new Date(iso).toDateString(); }
-
-function nav(pg) {
-  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('on'));
-  document.getElementById('pg-' + pg).classList.add('on');
-  document.getElementById('nav-' + pg).classList.add('on');
-  if (pg === 'log') renderLog();
-  if (pg === 'report') renderReport();
-  if (pg === 'checkin') showPicker();
+// ══════════════════════════════════════════
+// JSONBIN CLOUD SYNC
+// ══════════════════════════════════════════
+async function cloudHeaders(){
+  return {'Content-Type':'application/json','X-Master-Key':getAPIKey(),'X-Bin-Versioning':'false'}
 }
 
-function renderCards() {
-  Object.entries(UNIS).forEach(([uk, u]) => {
-    const el = document.getElementById(uk + '-cards');
-    el.innerHTML = u.courses.map(c => {
-      const cnt = Object.values(DB.students).filter(s => s.courseId === c.id).length;
-      const isActive = activeCourse === c.id;
-      return `<div class="ccard${isActive ? ' sel' : ''}" id="cc-${c.id}" onclick="selectCourse('${c.id}')"
-        style="${isActive ? `border-color:${c.tc};background:${c.bg}` : ''}">
+async function loadFromCloud(){
+  const key = getAPIKey();
+  if(!key){ loadLoc(); return; }
+  try{
+    // get or create bin
+    if(!BIN_ID){ BIN_ID = lsGet('qr_binid'); }
+    if(!BIN_ID){
+      // create new bin
+      const res = await fetch(`${JSONBIN_BASE}/b`,{
+        method:'POST',
+        headers:{...(await cloudHeaders()),'X-Bin-Name':'qr-attendance','X-Bin-Private':'true'},
+        body: JSON.stringify({logs:[],students:{}})
+      });
+      if(!res.ok) throw new Error('create failed');
+      const j = await res.json();
+      BIN_ID = j.metadata.id;
+      lsSet('qr_binid', BIN_ID);
+    }
+    const res = await fetch(`${JSONBIN_BASE}/b/${BIN_ID}/latest`,{headers: await cloudHeaders()});
+    if(!res.ok) throw new Error('read failed');
+    const j = await res.json();
+    DB = j.record;
+    saveLoc();
+  } catch(e){
+    console.warn('Cloud load failed, using local:', e);
+    loadLoc();
+  }
+}
+
+async function saveToCloud(){
+  saveLoc();
+  const key = getAPIKey();
+  if(!key || !BIN_ID) return;
+  try{
+    await fetch(`${JSONBIN_BASE}/b/${BIN_ID}`,{
+      method:'PUT',
+      headers: await cloudHeaders(),
+      body: JSON.stringify(DB)
+    });
+  } catch(e){ console.warn('Cloud save failed:', e); }
+}
+
+// ══════════════════════════════════════════
+// ROUTING — student vs admin
+// ══════════════════════════════════════════
+function route(){
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get('course');
+  if(course && getCourse(course)){
+    // Student view
+    document.getElementById('student-view').style.display='block';
+    ciCourse = course;
+    const c = getCourse(course);
+    const u = getUni(course);
+    document.getElementById('ci-course-icon').textContent = c.icon;
+    document.getElementById('ci-course-name').textContent = c.name;
+    document.getElementById('ci-course-uni').textContent = u.short + ' Egypt';
+    document.getElementById('ci-lecs').innerHTML = Array.from({length:8},(_,i)=>i+1).map(n=>
+      `<button class="lec-btn" onclick="pickLec(${n},this)">L${n}</button>`).join('');
+    loadFromCloud();
+  } else {
+    // Admin view
+    document.getElementById('admin-view').style.display='block';
+    loadFromCloud().then(()=>{
+      renderCards();
+      const k = lsGet('qr_apikey');
+      if(k) document.getElementById('api-key-input').value = k;
+      updateKeyStatus();
+    });
+  }
+}
+
+// ══════════════════════════════════════════
+// ADMIN
+// ══════════════════════════════════════════
+function nav(pg){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pg-'+pg).classList.add('on');
+  document.getElementById('nav-'+pg).classList.add('on');
+  if(pg==='log') renderLog();
+  if(pg==='report') renderReport();
+}
+
+function renderCards(){
+  Object.entries(UNIS).forEach(([uk,u])=>{
+    const el = document.getElementById(uk+'-cards');
+    el.innerHTML = u.courses.map(c=>{
+      const cnt = Object.values(DB.students).filter(s=>s.courseId===c.id).length;
+      const isActive = activeCourse===c.id;
+      return `<div class="ccard${isActive?' sel':''}" onclick="selectCourse('${c.id}')"
+        style="${isActive?`border-color:${c.tc};background:${c.bg}`:''}">
         <div class="ccard-icon">${c.icon}</div>
         <div class="ccard-name">${c.name}</div>
-        <div class="ccard-meta">${isActive ? '<span class="live-dot"></span>Active · ' : ''}${cnt} student${cnt !== 1 ? 's' : ''}</div>
+        <div class="ccard-meta">${isActive?'<span class="live-dot"></span>':''}${cnt} student${cnt!==1?'s':''}</div>
       </div>`;
     }).join('');
   });
 }
 
-function selectCourse(cid) {
+function selectCourse(cid){
   activeCourse = cid;
   renderCards();
   const c = getCourse(cid);
   const u = getUni(cid);
-  const cnt = Object.values(DB.students).filter(s => s.courseId === cid).length;
-  const totalScans = DB.logs.filter(l => l.courseId === cid).length;
-  const recent = [...DB.logs].filter(l => l.courseId === cid).reverse().slice(0, 4);
-  const checkinURL = window.location.href.split('?')[0] + '?course=' + cid;
-  document.getElementById('qr-area').innerHTML = `
+  const cnt = Object.values(DB.students).filter(s=>s.courseId===cid).length;
+  const totalScans = DB.logs.filter(l=>l.courseId===cid).length;
+  const recent = [...DB.logs].filter(l=>l.courseId===cid).reverse().slice(0,4);
+  const checkinURL = window.location.href.split('?')[0]+'?course='+cid;
+  document.getElementById('qr-area').innerHTML=`
     <div class="card">
       <div style="font-weight:600;font-size:15px;margin-bottom:1rem">${c.icon} ${c.name} — ${u.short} Egypt</div>
       <div class="qr-inner">
-        <div id="qrc-main" style="flex-shrink:0;border-radius:8px;overflow:hidden;border:0.5px solid var(--border);background:#fff;"></div>
+        <div id="qrc-main" style="flex-shrink:0;border-radius:8px;overflow:hidden;background:#fff;border:.5px solid var(--border)"></div>
         <div class="qr-right">
           <div class="kv"><span class="kk">University</span><span class="vv">${u.short} Egypt</span></div>
           <div class="kv"><span class="kk">Course</span><span class="vv">${c.name}</span></div>
           <div class="kv"><span class="kk">Students</span><span class="vv">${cnt}</span></div>
-          <div class="kv"><span class="kk">Total scans</span><span class="vv">${totalScans}</span></div>
-          <div class="kv" style="margin-top:4px"><span class="kk">Scan URL</span><span class="vv" style="font-size:10px;word-break:break-all;color:var(--text2)">${checkinURL}</span></div>
-          ${recent.length ? `<div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Recent scans</div>
-          ${recent.map(l => `<div class="recent-scan"><span class="rs-name">${l.name}</span><span style="font-size:11px;color:var(--text2)">L${l.lec}</span><span class="rs-time">${fmtTime(l.ts)}</span></div>`).join('')}` : ''}
+          <div class="kv"><span class="kk">Scans</span><span class="vv">${totalScans}</span></div>
+          <div class="kv"><span class="kk">URL</span><span class="vv" style="font-size:10px;word-break:break-all;color:var(--text2)">${checkinURL}</span></div>
+          ${recent.length?`<div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Recent scans</div>
+            ${recent.map(l=>`<div class="recent-scan"><span class="rs-name">${l.name}</span><span style="font-size:11px;color:var(--text2)">L${l.lec}</span><span class="rs-time">${fmtTime(l.ts)}</span></div>`).join('')}`:''}
           <div class="btn-row">
             <button class="btn btn-p" onclick="dlQR()">⬇ Download QR</button>
-            <button class="btn" onclick="copyLink()">🔗 Copy link</button>
+            <button class="btn" onclick="copyLink('${cid}')">🔗 Copy link</button>
             <button class="btn btn-d" onclick="clearCourse()">🗑 Clear</button>
           </div>
         </div>
       </div>
     </div>`;
-  // Generate real scannable QR code
-  new QRCode(document.getElementById('qrc-main'), {
-    text: checkinURL,
-    width: 180,
-    height: 180,
-    colorDark: '#1a1a18',
-    colorLight: '#ffffff',
+  new QRCode(document.getElementById('qrc-main'),{
+    text: checkinURL, width:180, height:180,
+    colorDark:'#1a1a18', colorLight:'#ffffff',
     correctLevel: QRCode.CorrectLevel.M
   });
 }
 
-function dlQR() {
+function dlQR(){
   const wrap = document.getElementById('qrc-main');
-  if (!wrap) return;
-  // qrcode.js renders a canvas inside the div
+  if(!wrap) return;
   const canvas = wrap.querySelector('canvas');
-  if (canvas) {
-    const a = document.createElement('a');
-    a.download = activeCourse + '-qr.png';
-    a.href = canvas.toDataURL('image/png');
-    a.click();
-  } else {
-    // fallback: grab img tag
-    const img = wrap.querySelector('img');
-    if (img) { const a = document.createElement('a'); a.download = activeCourse + '-qr.png'; a.href = img.src; a.click(); }
-  }
+  if(canvas){ const a=document.createElement('a');a.download=activeCourse+'-qr.png';a.href=canvas.toDataURL('image/png');a.click(); }
+}
+function copyLink(cid){
+  const url = window.location.href.split('?')[0]+'?course='+cid;
+  navigator.clipboard.writeText(url).catch(()=>{}).finally(()=>alert('Link copied!\n\nThis is the URL encoded in the QR. Students who scan go straight to the check-in page.'));
+}
+function clearCourse(){
+  if(!activeCourse||!confirm('Clear ALL data for this course?')) return;
+  DB.logs=DB.logs.filter(l=>l.courseId!==activeCourse);
+  Object.keys(DB.students).forEach(k=>{if(DB.students[k].courseId===activeCourse)delete DB.students[k]});
+  saveToCloud(); renderCards();
+  document.getElementById('qr-area').innerHTML='';
+  activeCourse=null;
 }
 
-function copyLink() {
-  const url = window.location.href.split('?')[0] + '?course=' + activeCourse;
-  navigator.clipboard.writeText(url).catch(() => {}).finally(() => alert('Link copied!\n\nPaste it into qr-code-generator.com and download the QR image to print.'));
-}
-
-function clearCourse() {
-  if (!activeCourse || !confirm('Clear ALL data for this course?')) return;
-  DB.logs = DB.logs.filter(l => l.courseId !== activeCourse);
-  Object.keys(DB.students).forEach(k => { if (DB.students[k].courseId === activeCourse) delete DB.students[k]; });
-  save(); renderCards();
-  document.getElementById('qr-area').innerHTML = '';
-  activeCourse = null;
-}
-
-// Check-in
-function showPicker() {
-  ciCourse = null; ciLec = null;
-  document.getElementById('ci-picker').style.display = 'block';
-  document.getElementById('ci-form').style.display = 'none';
-  document.getElementById('ci-success').classList.remove('on');
-  ['kfu', 'spbu'].forEach(uk => {
-    document.getElementById('pick-' + uk).innerHTML = UNIS[uk].courses.map(c =>
-      `<div class="pick-opt" onclick="startCI('${c.id}')">
-        <div class="pick-uni">${UNIS[uk].short}</div>
-        <div class="pick-course">${c.icon} ${c.name}</div>
-      </div>`).join('');
-  });
-  // Auto-select from URL param
-  const cp = new URLSearchParams(window.location.search).get('course');
-  if (cp && getCourse(cp)) startCI(cp);
-}
-
-function startCI(cid) {
-  ciCourse = cid; ciLec = null;
-  const c = getCourse(cid);
-  const u = getUni(cid);
-  document.getElementById('ci-picker').style.display = 'none';
-  document.getElementById('ci-form').style.display = 'block';
-  document.getElementById('ci-success').classList.remove('on');
-  document.getElementById('ci-icon').style.background = c.bg;
-  document.getElementById('ci-course-title').textContent = c.icon + ' ' + c.name;
-  document.getElementById('ci-course-sub').textContent = u.short + ' Egypt';
-  document.getElementById('ci-name').value = '';
-  ['ci-err','ci-warn'].forEach(id => document.getElementById(id).classList.remove('on'));
-  document.getElementById('ci-lecs').innerHTML = Array.from({length:8},(_,i)=>i+1).map(n =>
-    `<button class="lec-btn" onclick="pickLec(${n},this)">Lecture ${n}</button>`).join('');
-}
-
-function pickLec(n, btn) {
-  ciLec = n;
-  document.querySelectorAll('.lec-btn').forEach(b => b.classList.remove('on'));
+// ══════════════════════════════════════════
+// STUDENT CHECK-IN
+// ══════════════════════════════════════════
+function pickLec(n,btn){
+  ciLec=n;
+  document.querySelectorAll('.lec-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
 }
 
-function doCheckin() {
+async function doCheckin(){
   const name = document.getElementById('ci-name').value.trim();
-  ['ci-err','ci-warn'].forEach(id => document.getElementById(id).classList.remove('on'));
-  if (!name) { showAlert('ci-err', 'Enter your name to continue.'); return; }
-  if (!ciLec) { showAlert('ci-err', 'Select a lecture number.'); return; }
-  const key = ciCourse + '::' + name.toLowerCase().replace(/\s+/g, '_');
-  const already = DB.logs.find(l => l.key === key && l.lec === ciLec);
-  if (already) {
-    showAlert('ci-warn', `Already checked in for Lecture ${ciLec} on ${fmtDate(already.ts)} at ${fmtTime(already.ts)}.`);
+  ['ci-err','ci-warn'].forEach(id=>{ const el=document.getElementById(id); el.classList.remove('on'); });
+  if(!name){ showAlert('ci-err','Enter your name to continue.'); return; }
+  if(!ciLec){ showAlert('ci-err','Select a lecture number.'); return; }
+
+  const btn = document.getElementById('ci-submit-btn');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Saving…';
+
+  // reload fresh data first to avoid overwriting someone else
+  await loadFromCloud();
+
+  const key = ciCourse+'::'+name.toLowerCase().replace(/\s+/g,'_');
+  const already = DB.logs.find(l=>l.key===key && l.lec===ciLec);
+  if(already){
+    btn.disabled=false; btn.textContent='Mark attendance';
+    showAlert('ci-warn',`Already checked in for Lecture ${ciLec} on ${fmtDate(already.ts)} at ${fmtTime(already.ts)}.`);
     return;
   }
+
   const ts = new Date().toISOString();
-  DB.logs.push({ key, courseId: ciCourse, name, lec: ciLec, ts });
-  if (!DB.students[key]) DB.students[key] = { name, courseId: ciCourse, key, lecs: [] };
-  if (!DB.students[key].lecs.includes(ciLec)) DB.students[key].lecs.push(ciLec);
-  save();
+  DB.logs.push({key, courseId:ciCourse, name, lec:ciLec, ts});
+  if(!DB.students[key]) DB.students[key]={name, courseId:ciCourse, key, lecs:[]};
+  if(!DB.students[key].lecs.includes(ciLec)) DB.students[key].lecs.push(ciLec);
+
+  await saveToCloud();
+  btn.disabled=false; btn.textContent='Mark attendance';
+
   const c = getCourse(ciCourse);
   const u = getUni(ciCourse);
-  document.getElementById('ci-form').style.display = 'none';
+  document.getElementById('ci-form').style.display='none';
   document.getElementById('ci-success').classList.add('on');
-  document.getElementById('suc-title').textContent = 'Hi, ' + name.split(' ')[0] + '! ✓';
-  document.getElementById('suc-sub').textContent = `Lecture ${ciLec} · ${c.icon} ${c.name} · ${u.short} Egypt\n${fmtDate(ts)} at ${fmtTime(ts)}`;
+  document.getElementById('suc-title').textContent='Hi, '+name.split(' ')[0]+'! ✅';
+  document.getElementById('suc-sub').textContent=`Lecture ${ciLec} · ${c.name} · ${u.short} Egypt\n${fmtDate(ts)} at ${fmtTime(ts)}`;
   const myLecs = DB.students[key].lecs;
-  document.getElementById('suc-att').innerHTML = Array.from({length:8},(_,i)=>i+1).map(n => {
-    const p = myLecs.includes(n);
+  document.getElementById('suc-att').innerHTML=Array.from({length:8},(_,i)=>i+1).map(n=>{
+    const p=myLecs.includes(n);
     return `<div class="att-pip" style="background:${p?c.bg:'var(--surface2)'};color:${p?c.tc:'var(--text3)'}">L${n}</div>`;
   }).join('');
-  renderCards();
-  document.getElementById('nav-log').classList.add('live');
 }
 
-function showAlert(id, msg) {
-  const el = document.getElementById(id); el.textContent = msg; el.classList.add('on');
+function resetCI(){
+  document.getElementById('ci-name').value='';
+  ciLec=null;
+  document.querySelectorAll('.lec-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('ci-form').style.display='block';
+  document.getElementById('ci-success').classList.remove('on');
+  ['ci-err','ci-warn'].forEach(id=>document.getElementById(id).classList.remove('on'));
 }
 
-// Log
-function renderLog() {
-  const uniF = document.getElementById('log-uni').value;
-  const courseF = document.getElementById('log-course').value;
-  const lecF = document.getElementById('log-lec').value;
-  const q = (document.getElementById('log-search').value || '').toLowerCase();
-  populateCourseSelect('log-course', uniF, courseF);
-  let logs = [...DB.logs].reverse();
-  if (uniF) logs = logs.filter(l => getUniKey(l.courseId) === uniF);
-  if (courseF) logs = logs.filter(l => l.courseId === courseF);
-  if (lecF) logs = logs.filter(l => l.lec === parseInt(lecF));
-  if (q) logs = logs.filter(l => l.name.toLowerCase().includes(q));
-  const body = document.getElementById('log-body');
-  if (!logs.length) { body.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div>No log entries yet. Once students scan and check in, every scan appears here.</div>'; return; }
-  const groups = {};
-  logs.forEach(l => { const dk = dayKey(l.ts); if (!groups[dk]) groups[dk] = []; groups[dk].push(l); });
-  body.innerHTML = Object.entries(groups).map(([dk, entries]) => `
+function showAlert(id,msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('on'); }
+
+// ══════════════════════════════════════════
+// LOG
+// ══════════════════════════════════════════
+function renderLog(){
+  const uniF=document.getElementById('log-uni').value;
+  const courseF=document.getElementById('log-course').value;
+  const lecF=document.getElementById('log-lec').value;
+  const q=(document.getElementById('log-search').value||'').toLowerCase();
+  populateCourseSelect('log-course',uniF,courseF);
+  let logs=[...DB.logs].reverse();
+  if(uniF) logs=logs.filter(l=>getUniKey(l.courseId)===uniF);
+  if(courseF) logs=logs.filter(l=>l.courseId===courseF);
+  if(lecF) logs=logs.filter(l=>l.lec===parseInt(lecF));
+  if(q) logs=logs.filter(l=>l.name.toLowerCase().includes(q));
+  const body=document.getElementById('log-body');
+  if(!logs.length){ body.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div>No entries yet.</div>'; return; }
+  const groups={};
+  logs.forEach(l=>{ const dk=dayKey(l.ts); if(!groups[dk])groups[dk]=[]; groups[dk].push(l); });
+  body.innerHTML=Object.entries(groups).map(([dk,entries])=>`
     <div class="log-day-label">📅 ${fmtDate(entries[0].ts)} — ${entries.length} scan${entries.length!==1?'s':''}</div>
-    ${entries.map(l => {
-      const c = getCourse(l.courseId);
-      const u = getUni(l.courseId);
+    ${entries.map(l=>{
+      const c=getCourse(l.courseId); const u=getUni(l.courseId);
       return `<div class="log-entry">
         <div class="log-av" style="background:${c.bg};color:${c.tc}">${initials(l.name)}</div>
         <div style="flex:1;min-width:0">
@@ -603,124 +653,119 @@ function renderLog() {
       </div>`;
     }).join('')}`).join('');
 }
+function clearLog(){ if(!confirm('Delete activity log?')) return; DB.logs=[]; saveToCloud(); renderLog(); }
 
-function clearLog() {
-  if (!confirm('Delete the activity log? Student records will be kept.')) return;
-  DB.logs = []; save(); renderLog();
-  document.getElementById('nav-log').classList.remove('live');
-}
-
-// Report
-function renderReport() {
-  const uniF = document.getElementById('rep-uni').value;
-  const courseF = document.getElementById('rep-course').value;
-  const q = (document.getElementById('rep-search').value || '').toLowerCase();
-  populateCourseSelect('rep-course', uniF, courseF);
-  let stus = Object.values(DB.students);
-  if (uniF) stus = stus.filter(s => getUniKey(s.courseId) === uniF);
-  if (courseF) stus = stus.filter(s => s.courseId === courseF);
-  if (q) stus = stus.filter(s => s.name.toLowerCase().includes(q));
-  stus.sort((a,b) => b.lecs.length - a.lecs.length);
-  const totalCI = stus.reduce((a,s)=>a+s.lecs.length, 0);
-  const avgPct = stus.length ? Math.round(stus.reduce((a,s)=>a+s.lecs.length,0)/stus.length/8*100) : 0;
-  document.getElementById('rep-stats').innerHTML = `
+// ══════════════════════════════════════════
+// REPORT
+// ══════════════════════════════════════════
+function renderReport(){
+  const uniF=document.getElementById('rep-uni').value;
+  const courseF=document.getElementById('rep-course').value;
+  const q=(document.getElementById('rep-search').value||'').toLowerCase();
+  populateCourseSelect('rep-course',uniF,courseF);
+  let stus=Object.values(DB.students);
+  if(uniF) stus=stus.filter(s=>getUniKey(s.courseId)===uniF);
+  if(courseF) stus=stus.filter(s=>s.courseId===courseF);
+  if(q) stus=stus.filter(s=>s.name.toLowerCase().includes(q));
+  stus.sort((a,b)=>b.lecs.length-a.lecs.length);
+  const totalCI=stus.reduce((a,s)=>a+s.lecs.length,0);
+  const avgPct=stus.length?Math.round(stus.reduce((a,s)=>a+s.lecs.length,0)/stus.length/8*100):0;
+  document.getElementById('rep-stats').innerHTML=`
     <div class="stat"><div class="stat-n">${stus.length}</div><div class="stat-l">Students</div></div>
-    <div class="stat"><div class="stat-n">${totalCI}</div><div class="stat-l">Total check-ins</div></div>
+    <div class="stat"><div class="stat-n">${totalCI}</div><div class="stat-l">Check-ins</div></div>
     <div class="stat"><div class="stat-n">${avgPct}%</div><div class="stat-l">Avg attendance</div></div>
-    <div class="stat"><div class="stat-n">${stus.filter(s=>Math.round(s.lecs.length/8*100)<60).length}</div><div class="stat-l">At risk (&lt;60%)</div></div>`;
-  const body = document.getElementById('rep-body');
-  if (!stus.length) { body.innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div>No attendance data yet.</div>'; return; }
-  body.innerHTML = stus.map(s => {
-    const c = getCourse(s.courseId);
-    const u = getUni(s.courseId);
-    const pct = Math.round(s.lecs.length / 8 * 100);
-    const pctColor = pct>=80?'var(--success)':pct>=60?'var(--warn)':'var(--danger)';
-    const myLogs = DB.logs.filter(l => l.key === s.key).sort((a,b)=>a.lec-b.lec);
-    const safeId = 'stu_' + s.key.replace(/[^a-z0-9]/gi,'_');
+    <div class="stat"><div class="stat-n">${stus.filter(s=>Math.round(s.lecs.length/8*100)<60).length}</div><div class="stat-l">At risk</div></div>`;
+  const body=document.getElementById('rep-body');
+  if(!stus.length){ body.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div>No data yet.</div>'; return; }
+  body.innerHTML=stus.map(s=>{
+    const c=getCourse(s.courseId); const u=getUni(s.courseId);
+    const pct=Math.round(s.lecs.length/8*100);
+    const col=pct>=80?'var(--success)':pct>=60?'var(--warn)':'var(--danger)';
+    const myLogs=DB.logs.filter(l=>l.key===s.key).sort((a,b)=>a.lec-b.lec);
+    const sid='stu_'+s.key.replace(/[^a-z0-9]/gi,'_');
     return `<div>
-      <div class="stu-row" onclick="toggleStu('${safeId}')">
+      <div class="stu-row" onclick="toggleStu('${sid}')">
         <div class="stu-av" style="background:${c.bg};color:${c.tc}">${initials(s.name)}</div>
         <div style="flex:1;min-width:0">
           <div class="stu-name">${s.name}</div>
           <div class="stu-meta">${c.icon} ${c.name} · ${u.short}</div>
           <div class="stu-pips">${Array.from({length:8},(_,i)=>i+1).map(n=>`<div class="stu-pip" style="background:${s.lecs.includes(n)?c.bg:'var(--surface2)'};color:${s.lecs.includes(n)?c.tc:'var(--text3)'}">${n}</div>`).join('')}</div>
         </div>
-        <span style="font-size:13px;font-weight:600;color:${pctColor};flex-shrink:0">${pct}%</span>
+        <span style="font-size:13px;font-weight:700;color:${col};flex-shrink:0">${pct}%</span>
       </div>
-      <div class="stu-detail" id="${safeId}">
-        ${myLogs.length ? myLogs.map(l=>`<div class="de-entry"><span class="de-lec">L${l.lec}</span><span class="de-date">${fmtDate(l.ts)}</span><span class="de-time">${fmtTime(l.ts)}</span></div>`).join('') : '<div style="font-size:12px;color:var(--text2);padding:4px">No scan history.</div>'}
+      <div class="stu-detail" id="${sid}">
+        ${myLogs.length?myLogs.map(l=>`<div class="de-entry"><span class="de-lec">L${l.lec}</span><span class="de-date">${fmtDate(l.ts)}</span><span class="de-time">${fmtTime(l.ts)}</span></div>`).join(''):'<div style="font-size:12px;color:var(--text2);padding:4px">No history.</div>'}
       </div>
     </div>`;
   }).join('');
 }
-
-function toggleStu(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const open = el.classList.contains('on');
-  document.querySelectorAll('.stu-detail').forEach(d => d.classList.remove('on'));
-  if (!open) el.classList.add('on');
+function toggleStu(id){
+  const el=document.getElementById(id); if(!el) return;
+  const open=el.classList.contains('on');
+  document.querySelectorAll('.stu-detail').forEach(d=>d.classList.remove('on'));
+  if(!open) el.classList.add('on');
 }
 
-function populateCourseSelect(selectId, uniF, currentVal) {
-  const sel = document.getElementById(selectId);
-  const courses = uniF ? UNIS[uniF].courses : ALL_COURSES;
-  sel.innerHTML = '<option value="">All courses</option>' +
-    courses.map(c => `<option value="${c.id}">${c.icon} ${c.name} (${getUni(c.id).short})</option>`).join('');
-  if (currentVal) sel.value = currentVal;
+// ══════════════════════════════════════════
+// EXPORT
+// ══════════════════════════════════════════
+function exportCSV(){
+  const rows=[['Name','University','Course','Lecture','Date','Time','Timestamp']];
+  DB.logs.forEach(l=>{ const c=getCourse(l.courseId); const u=getUni(l.courseId);
+    rows.push([l.name,u.name,c.name,'Lecture '+l.lec,fmtDate(l.ts),fmtTime(l.ts),l.ts]); });
+  const csv=rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  dl('attendance.csv','data:text/csv;charset=utf-8,'+encodeURIComponent(csv));
+}
+function exportJSON(){ dl('attendance-backup.json','data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(DB,null,2))); }
+function importJSON(input){
+  const f=input.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=e=>{ try{ DB=JSON.parse(e.target.result); saveToCloud(); renderCards(); document.getElementById('import-ok').classList.add('on'); }
+    catch(err){ document.getElementById('import-err').classList.add('on'); } };
+  r.readAsText(f);
+}
+function nukeAll(){
+  if(!confirm('Delete ALL data?')) return;
+  if(!confirm('Are you sure? This cannot be undone.')) return;
+  DB={logs:[],students:{}}; saveToCloud(); renderCards();
+  document.getElementById('qr-area').innerHTML=''; activeCourse=null;
+}
+function dl(name,url){ const a=document.createElement('a');a.download=name;a.href=url;a.click(); }
+function populateCourseSelect(id,uniF,cur){
+  const sel=document.getElementById(id);
+  const courses=uniF?UNIS[uniF].courses:ALL_COURSES;
+  sel.innerHTML='<option value="">All courses</option>'+courses.map(c=>`<option value="${c.id}">${c.icon} ${c.name} (${getUni(c.id).short})</option>`).join('');
+  if(cur) sel.value=cur;
 }
 
-// Export
-function exportCSV() {
-  const rows = [['Name','University','Course','Lecture','Date','Time','Timestamp']];
-  DB.logs.forEach(l => {
-    const c = getCourse(l.courseId);
-    const u = getUni(l.courseId);
-    rows.push([l.name, u.name, c.name, 'Lecture '+l.lec, fmtDate(l.ts), fmtTime(l.ts), l.ts]);
-  });
-  const csv = rows.map(r => r.map(v => `"${v}"`).join(',')).join('\n');
-  dl('attendance-export.csv', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+// ══════════════════════════════════════════
+// SETUP / API KEY
+// ══════════════════════════════════════════
+async function saveAPIKey(){
+  const key=document.getElementById('api-key-input').value.trim();
+  ['key-ok','key-err'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  if(!key){ showAlert('key-err','Paste your API key first.'); return; }
+  lsSet('qr_apikey',key);
+  BIN_ID=null; lsSet('qr_binid','');
+  document.getElementById('key-ok').classList.add('on');
+  document.getElementById('key-ok').textContent='API key saved! Connecting…';
+  await loadFromCloud();
+  if(BIN_ID){
+    document.getElementById('key-ok').textContent='✅ Connected! Cloud sync is active.';
+    updateKeyStatus();
+  } else {
+    document.getElementById('key-err').textContent='Could not connect. Check your API key and try again.';
+    document.getElementById('key-err').classList.add('on');
+  }
+}
+function updateKeyStatus(){
+  const el=document.getElementById('key-status'); if(!el) return;
+  const key=getAPIKey();
+  el.textContent = key ? '✅ Cloud sync active — student scans save automatically.' : '⚠️ No API key set — data only saves on this device.';
 }
 
-function exportJSON() {
-  dl('attendance-backup.json', 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(DB, null, 2)));
-}
-
-function importJSON(input) {
-  const file = input.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      DB = JSON.parse(e.target.result);
-      save(); renderCards();
-      showImportAlert('import-ok'); 
-    } catch(err) { showImportAlert('import-err'); }
-  };
-  reader.readAsText(file);
-}
-
-function showImportAlert(id) {
-  ['import-ok','import-err'].forEach(i => document.getElementById(i).classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-}
-
-function nukeAll() {
-  if (!confirm('⚠️ This will permanently delete ALL data from ALL courses. Are you sure?')) return;
-  if (!confirm('Last chance — download a backup first. Really delete everything?')) return;
-  DB = { logs: [], students: {} }; save(); renderCards();
-  document.getElementById('qr-area').innerHTML = '';
-  activeCourse = null;
-}
-
-function dl(filename, dataurl) {
-  const a = document.createElement('a'); a.download = filename; a.href = dataurl; a.click();
-}
-
-// Init
-renderCards();
-showPicker();
-const cp = new URLSearchParams(window.location.search).get('course');
-if (cp && getCourse(cp)) { nav('checkin'); }
+// ── boot ──
+route();
 </script>
 </body>
 </html>
