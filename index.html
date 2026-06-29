@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>QR Attendance — KFU & SPbU Egypt</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   :root {
     --bg: #f5f5f3;
@@ -431,16 +432,18 @@ function selectCourse(cid) {
   const cnt = Object.values(DB.students).filter(s => s.courseId === cid).length;
   const totalScans = DB.logs.filter(l => l.courseId === cid).length;
   const recent = [...DB.logs].filter(l => l.courseId === cid).reverse().slice(0, 4);
+  const checkinURL = window.location.href.split('?')[0] + '?course=' + cid;
   document.getElementById('qr-area').innerHTML = `
     <div class="card">
       <div style="font-weight:600;font-size:15px;margin-bottom:1rem">${c.icon} ${c.name} — ${u.short} Egypt</div>
       <div class="qr-inner">
-        <canvas class="qrc" id="qrc-main" width="180" height="180"></canvas>
+        <div id="qrc-main" style="flex-shrink:0;border-radius:8px;overflow:hidden;border:0.5px solid var(--border);background:#fff;"></div>
         <div class="qr-right">
           <div class="kv"><span class="kk">University</span><span class="vv">${u.short} Egypt</span></div>
           <div class="kv"><span class="kk">Course</span><span class="vv">${c.name}</span></div>
           <div class="kv"><span class="kk">Students</span><span class="vv">${cnt}</span></div>
           <div class="kv"><span class="kk">Total scans</span><span class="vv">${totalScans}</span></div>
+          <div class="kv" style="margin-top:4px"><span class="kk">Scan URL</span><span class="vv" style="font-size:10px;word-break:break-all;color:var(--text2)">${checkinURL}</span></div>
           ${recent.length ? `<div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Recent scans</div>
           ${recent.map(l => `<div class="recent-scan"><span class="rs-name">${l.name}</span><span style="font-size:11px;color:var(--text2)">L${l.lec}</span><span class="rs-time">${fmtTime(l.ts)}</span></div>`).join('')}` : ''}
           <div class="btn-row">
@@ -451,45 +454,32 @@ function selectCourse(cid) {
         </div>
       </div>
     </div>`;
-  drawQR('qrc-main', cid, c.icon, c.bg, c.tc);
-}
-
-function drawQR(canvasId, seed, label, bg, fg) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const s = canvas.width;
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, s, s);
-  const hash = seed.split('').reduce((a, c) => ((a << 5) - a) + c.charCodeAt(0), 0) >>> 0;
-  const rng = h => { let x = h; return () => { x = (x * 1664525 + 1013904223) & 0xffffffff; return (x >>> 0) / 0xffffffff; }; };
-  const r = rng(hash);
-  const n = 25, cell = Math.floor((s - 14) / n), off = Math.floor((s - cell * n) / 2);
-  const m = [];
-  for (let i = 0; i < n; i++) { m.push([]); for (let j = 0; j < n; j++) m[i].push(r() > 0.5); }
-  [[0,0],[0,n-7],[n-7,0]].forEach(([row, col]) => {
-    for (let dr = 0; dr < 7; dr++) for (let dc = 0; dc < 7; dc++) {
-      const b = (dr===0||dr===6||dc===0||dc===6), inn = (dr>=2&&dr<=4&&dc>=2&&dc<=4);
-      m[row+dr][col+dc] = b || inn;
-    }
+  // Generate real scannable QR code
+  new QRCode(document.getElementById('qrc-main'), {
+    text: checkinURL,
+    width: 180,
+    height: 180,
+    colorDark: '#1a1a18',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
   });
-  ctx.fillStyle = '#1a1a18';
-  for (let row = 0; row < n; row++) for (let col = 0; col < n; col++)
-    if (m[row][col]) ctx.fillRect(off + col * cell, off + row * cell, cell, cell);
-  const cx = Math.floor(s/2), cy = Math.floor(s/2), cw = cell * 6, ch = cell * 2;
-  ctx.fillStyle = bg; ctx.fillRect(cx - Math.round(cw/2), cy - Math.round(ch/2), cw, ch);
-  ctx.fillStyle = fg; ctx.font = `bold ${cell + 2}px sans-serif`;
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText(label, cx, cy);
 }
 
 function dlQR() {
-  const c = document.getElementById('qrc-main');
-  if (!c) return;
-  const a = document.createElement('a');
-  a.download = activeCourse + '-qr.png';
-  a.href = c.toDataURL('image/png');
-  a.click();
+  const wrap = document.getElementById('qrc-main');
+  if (!wrap) return;
+  // qrcode.js renders a canvas inside the div
+  const canvas = wrap.querySelector('canvas');
+  if (canvas) {
+    const a = document.createElement('a');
+    a.download = activeCourse + '-qr.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  } else {
+    // fallback: grab img tag
+    const img = wrap.querySelector('img');
+    if (img) { const a = document.createElement('a'); a.download = activeCourse + '-qr.png'; a.href = img.src; a.click(); }
+  }
 }
 
 function copyLink() {
