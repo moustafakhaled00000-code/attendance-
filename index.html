@@ -316,7 +316,10 @@ function getUniKey(cid){ return Object.keys(UNIS).find(k=>UNIS[k].courses.find(c
 function getUni(cid){ return UNIS[getUniKey(cid)] }
 function initials(n){ return n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase() }
 const EGYPT_TZ = 'Africa/Cairo';
-function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:EGYPT_TZ}) }
+function fmtDate(iso){
+  const d = new Date(iso).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:EGYPT_TZ});
+  return d.replace(/,/g,''); // strip any commas just in case
+}
 function fmtTime(iso){ return new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:EGYPT_TZ}) }
 function dayKey(iso){ return new Date(iso).toDateString() }
 function showAlert(id,msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('on'); }
@@ -513,7 +516,8 @@ async function doCheckin(){
   };
 
   try{
-    await appendRow(row);
+    const result = await appendRow(row);
+    console.log('SheetDB response:', result);
     ROWS.push(row);
   } catch(e){
     btn.disabled=false; btn.textContent='Mark attendance';
