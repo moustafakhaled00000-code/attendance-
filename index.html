@@ -25,8 +25,6 @@
 }}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;min-height:100vh}
-
-/* ── LAYOUT ── */
 .shell{display:flex;min-height:100vh}
 .sidebar{width:220px;background:var(--surface);border-right:.5px solid var(--border);padding:1.25rem 0;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
 .main{flex:1;padding:1.5rem;max-width:860px}
@@ -48,8 +46,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0;margin-left:auto;display:none}
 .nav-item.live .nav-dot{display:block}
 .pg{display:none}.pg.on{display:block}
-
-/* ── GENERIC ── */
 .page-head{margin-bottom:1.25rem}
 .page-title{font-size:20px;font-weight:600}
 .page-sub{font-size:13px;color:var(--text2);margin-top:3px}
@@ -79,8 +75,6 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
 .alert-err{background:var(--danger-bg);color:var(--danger-text);border:.5px solid var(--danger)}
 .alert-warn{background:var(--warn-bg);color:var(--warn-text);border:.5px solid var(--warn)}
 .alert-ok{background:var(--success-bg);color:var(--success-text);border:.5px solid var(--success)}
-
-/* ── ADMIN ── */
 .course-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
 .ccard{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:border-color .13s}
 .ccard:hover{border-color:var(--border-strong)}
@@ -97,18 +91,7 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
 .recent-scan{font-size:12px;padding:5px 8px;background:var(--surface2);border-radius:var(--radius);margin-bottom:3px;display:flex;gap:8px;align-items:center}
 .rs-name{font-weight:500;flex:1}
 .rs-time{font-family:var(--mono);color:var(--text3);font-size:11px}
-
-/* ── SETUP SCREEN ── */
-.setup-wrap{max-width:480px}
-.setup-step{background:var(--surface);border:.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:10px}
-.setup-step-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;margin-right:8px;flex-shrink:0}
-.setup-step-title{font-weight:600;font-size:14px;display:flex;align-items:center;margin-bottom:6px}
-.setup-step-body{font-size:13px;color:var(--text2);line-height:1.6;padding-left:32px}
-.setup-step-body a{color:var(--accent)}
-.setup-key-input{display:flex;gap:8px;margin-top:10px;padding-left:32px}
-.setup-key-input input{flex:1}
-
-/* ── STUDENT CHECK-IN (clean) ── */
+/* student page */
 .ci-page{min-height:100vh;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:1.5rem}
 .ci-box{background:var(--surface);border:.5px solid var(--border);border-radius:16px;padding:2rem 1.75rem;width:100%;max-width:380px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
 .ci-logo{text-align:center;margin-bottom:1.5rem}
@@ -122,10 +105,9 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
 .att-pip{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
 .success-wrap{display:none;text-align:center}
 .success-wrap.on{display:block}
-.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ── LOG ── */
+/* log */
 .log-day-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;padding:6px 0 4px;border-bottom:.5px solid var(--border);margin-bottom:6px;margin-top:16px}
 .log-entry{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:var(--radius);background:var(--surface);border:.5px solid var(--border);margin-bottom:4px}
 .log-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
@@ -133,8 +115,7 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
 .log-detail{font-size:11px;color:var(--text2);margin-top:1px}
 .log-lec{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--surface2);border:.5px solid var(--border);flex-shrink:0}
 .log-time{font-size:11px;color:var(--text3);font-family:var(--mono);flex-shrink:0}
-
-/* ── REPORT ── */
+/* report */
 .stu-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius);background:var(--surface);border:.5px solid var(--border);margin-bottom:4px;cursor:pointer;transition:border-color .13s}
 .stu-row:hover{border-color:var(--border-strong)}
 .stu-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
@@ -150,16 +131,12 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
 .de-time{font-family:var(--mono);color:var(--text3)}
 .empty-state{text-align:center;padding:3rem 1rem;color:var(--text2)}
 .empty-icon{font-size:36px;margin-bottom:10px}
-
-/* ── EXPORT ── */
-.export-area{background:var(--surface2);border-radius:var(--radius);padding:.75rem 1rem;font-size:12px;font-family:var(--mono);white-space:pre-wrap;word-break:break-all;max-height:200px;overflow-y:auto;margin-top:10px;border:.5px solid var(--border)}
+.sheets-banner{background:var(--success-bg);color:var(--success-text);border:.5px solid var(--success);border-radius:var(--radius);padding:10px 14px;font-size:13px;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════
-     STUDENT CHECK-IN VIEW (shown when ?course=xxx)
-════════════════════════════════════════════════ -->
+<!-- STUDENT VIEW -->
 <div id="student-view" style="display:none">
   <div class="ci-page">
     <div class="ci-box">
@@ -168,8 +145,6 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
         <div class="ci-logo-title" id="ci-course-name">Attendance</div>
         <div class="ci-logo-sub" id="ci-course-uni"></div>
       </div>
-
-      <!-- Form -->
       <div id="ci-form">
         <div class="alert alert-err" id="ci-err"></div>
         <div class="alert alert-warn" id="ci-warn"></div>
@@ -183,13 +158,11 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
         </div>
         <button class="big-btn" id="ci-submit-btn" onclick="doCheckin()">Mark attendance</button>
       </div>
-
-      <!-- Success -->
       <div class="success-wrap" id="ci-success">
         <div style="font-size:52px;margin-bottom:10px">✅</div>
         <div style="font-size:20px;font-weight:700;margin-bottom:6px" id="suc-title">Done!</div>
         <div style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:14px" id="suc-sub"></div>
-        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Your attendance</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Your attendance so far</div>
         <div class="att-row" id="suc-att"></div>
         <button class="btn" style="margin-top:1.25rem;width:100%;justify-content:center" onclick="resetCI()">↩ Check in someone else</button>
       </div>
@@ -197,9 +170,7 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     ADMIN VIEW
-════════════════════════════════════════════════ -->
+<!-- ADMIN VIEW -->
 <div id="admin-view" style="display:none">
 <div class="shell">
   <nav class="sidebar">
@@ -226,20 +197,18 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
       <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Export / backup
     </button>
-    <div class="nav-section-label" style="margin-top:auto">Settings</div>
-    <button class="nav-item" onclick="nav('setup')" id="nav-setup">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      Setup / API key
-    </button>
   </nav>
-
   <main class="main">
 
-    <!-- ADMIN / QR -->
+    <!-- QR PAGE -->
     <div class="pg on" id="pg-admin">
       <div class="page-head">
         <div class="page-title">QR codes</div>
-        <div class="page-sub">Select a course to view its QR code, then download and print it.</div>
+        <div class="page-sub">Select a course to view its QR, then download and print it.</div>
+      </div>
+      <div class="sheets-banner">
+        <span style="font-size:18px">📊</span>
+        <span>Connected to Google Sheets — every scan appears in your sheet automatically.</span>
       </div>
       <div class="section-label">Kazan Federal University — Egypt</div>
       <div class="course-grid" id="kfu-cards"></div>
@@ -248,11 +217,11 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
       <div id="qr-area" style="margin-top:1rem"></div>
     </div>
 
-    <!-- LOG -->
+    <!-- LOG PAGE -->
     <div class="pg" id="pg-log">
       <div class="page-head">
         <div class="page-title">Activity log</div>
-        <div class="page-sub">Every scan — exact day and time.</div>
+        <div class="page-sub">Every scan — exact day and time. Pulled live from Google Sheets.</div>
       </div>
       <div class="search-bar">
         <select id="log-uni" onchange="renderLog()">
@@ -267,13 +236,12 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
           <option>5</option><option>6</option><option>7</option><option>8</option>
         </select>
         <input type="text" id="log-search" placeholder="Search name…" oninput="renderLog()" style="flex:1;min-width:100px"/>
-        <button class="btn" onclick="loadFromCloud().then(renderLog)">↻ Refresh</button>
-        <button class="btn btn-d" onclick="clearLog()">🗑 Clear</button>
+        <button class="btn btn-p" onclick="refreshData('log')">↻ Refresh</button>
       </div>
       <div id="log-body"></div>
     </div>
 
-    <!-- REPORT -->
+    <!-- REPORT PAGE -->
     <div class="pg" id="pg-report">
       <div class="page-head">
         <div class="page-title">Attendance report</div>
@@ -288,65 +256,23 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
         </select>
         <select id="rep-course" onchange="renderReport()"><option value="">All courses</option></select>
         <input type="text" id="rep-search" placeholder="Search name…" oninput="renderReport()" style="flex:1;min-width:100px"/>
-        <button class="btn" onclick="loadFromCloud().then(renderReport)">↻ Refresh</button>
+        <button class="btn btn-p" onclick="refreshData('report')">↻ Refresh</button>
       </div>
       <div id="rep-body"></div>
     </div>
 
-    <!-- EXPORT -->
+    <!-- EXPORT PAGE -->
     <div class="pg" id="pg-export">
       <div class="page-head"><div class="page-title">Export &amp; backup</div></div>
       <div class="card">
-        <div style="font-weight:600;margin-bottom:6px">📥 Export to CSV (Excel)</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Every student, course, lecture, date and time in one spreadsheet.</div>
+        <div style="font-weight:600;margin-bottom:6px">📊 Your Google Sheet</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">All scans are already live in your Google Sheet. Open it any time to see the full data, sort it, filter it, or print it.</div>
+        <a class="btn btn-p" href="https://docs.google.com/spreadsheets" target="_blank">Open Google Sheets ↗</a>
+      </div>
+      <div class="card">
+        <div style="font-weight:600;margin-bottom:6px">📥 Download CSV snapshot</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Downloads everything currently loaded in this session as a CSV file.</div>
         <button class="btn btn-p" onclick="exportCSV()">⬇ Download CSV</button>
-      </div>
-      <div class="card">
-        <div style="font-weight:600;margin-bottom:6px">💾 Full backup (JSON)</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Save and restore all data.</div>
-        <div class="btn-row">
-          <button class="btn btn-p" onclick="exportJSON()">⬇ Download backup</button>
-          <label class="btn" style="cursor:pointer">📂 Restore backup<input type="file" accept=".json" onchange="importJSON(this)" style="display:none"/></label>
-        </div>
-        <div class="alert alert-ok" id="import-ok" style="margin-top:10px">Backup restored.</div>
-        <div class="alert alert-err" id="import-err" style="margin-top:10px">Could not read file.</div>
-      </div>
-      <div class="card">
-        <div style="font-weight:600;margin-bottom:6px">🗑 Danger zone</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:10px">Delete all data permanently. Download a backup first!</div>
-        <button class="btn btn-d" onclick="nukeAll()">Delete all data</button>
-      </div>
-    </div>
-
-    <!-- SETUP -->
-    <div class="pg" id="pg-setup">
-      <div class="page-head">
-        <div class="page-title">Setup</div>
-        <div class="page-sub">Connect a free cloud database so student scans sync to your device in real time.</div>
-      </div>
-      <div class="setup-wrap">
-        <div class="setup-step">
-          <div class="setup-step-title"><span class="setup-step-num">1</span>Create a free JSONBin account</div>
-          <div class="setup-step-body">Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> and click <strong>Sign Up</strong>. It's completely free — no credit card.</div>
-        </div>
-        <div class="setup-step">
-          <div class="setup-step-title"><span class="setup-step-num">2</span>Get your API key</div>
-          <div class="setup-step-body">After signing in, click your profile icon → <strong>API Keys</strong> → copy the key that starts with <code>$2b$</code>.</div>
-        </div>
-        <div class="setup-step">
-          <div class="setup-step-title"><span class="setup-step-num">3</span>Paste it below</div>
-          <div class="setup-key-input">
-            <input type="text" id="api-key-input" placeholder="$2b$10$…" maxlength="80"/>
-            <button class="btn btn-p" onclick="saveAPIKey()">Save</button>
-          </div>
-          <div class="alert alert-ok" id="key-ok" style="margin-top:10px;margin-left:32px">API key saved! Testing connection…</div>
-          <div class="alert alert-err" id="key-err" style="margin-top:10px;margin-left:32px"></div>
-        </div>
-        <div class="setup-step">
-          <div class="setup-step-title"><span class="setup-step-num">4</span>Done — it's automatic from here</div>
-          <div class="setup-step-body">Every student scan will save to the cloud instantly. You can open the admin panel on any device and click <strong>↻ Refresh</strong> to see live attendance.</div>
-        </div>
-        <div id="key-status" style="margin-top:1rem;font-size:13px;color:var(--text2)"></div>
       </div>
     </div>
 
@@ -355,17 +281,19 @@ select{padding:7px 10px;border:.5px solid var(--border);border-radius:var(--radi
 </div>
 
 <script>
-// ══════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
+// CONFIG — SheetDB API
+// ═══════════════════════════════════
+const SHEETDB = 'https://sheetdb.io/api/v1/h81g6tgnp2f59';
+
 const UNIS = {
-  kfu: { name:'Kazan Federal University — Egypt', short:'KFU',
+  kfu:  { name:'Kazan Federal University — Egypt',      short:'KFU',
     courses:[
-      {id:'kfu-bio', name:'Biology',  icon:'🧬', bg:'#E1F5EE', tc:'#0F6E56'},
-      {id:'kfu-eng', name:'English',  icon:'📖', bg:'#E6F1FB', tc:'#185FA5'}
+      {id:'kfu-bio',  name:'Biology', icon:'🧬', bg:'#E1F5EE', tc:'#0F6E56'},
+      {id:'kfu-eng',  name:'English', icon:'📖', bg:'#E6F1FB', tc:'#185FA5'}
     ]
   },
-  spbu:{ name:'Saint Petersburg University — Egypt', short:'SPbU',
+  spbu: { name:'Saint Petersburg University — Egypt',   short:'SPbU',
     courses:[
       {id:'spbu-sci', name:'Science', icon:'🔬', bg:'#EEEDFE', tc:'#534AB7'},
       {id:'spbu-eng', name:'English', icon:'📖', bg:'#EAF3DE', tc:'#3B6D11'}
@@ -374,17 +302,15 @@ const UNIS = {
 };
 const ALL_COURSES = Object.values(UNIS).flatMap(u=>u.courses);
 
-let DB = {logs:[], students:{}};
+// local cache of rows fetched from SheetDB
+let ROWS = [];
 let activeCourse = null;
 let ciCourse = null;
 let ciLec = null;
-let BIN_ID = null;
-const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
 
-// ── helpers ──
-function lsGet(k){ try{return localStorage.getItem(k)}catch(e){return null} }
-function lsSet(k,v){ try{localStorage.setItem(k,v)}catch(e){} }
-function getAPIKey(){ return lsGet('qr_apikey') || '' }
+// ═══════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════
 function getCourse(id){ return ALL_COURSES.find(c=>c.id===id) }
 function getUniKey(cid){ return Object.keys(UNIS).find(k=>UNIS[k].courses.find(c=>c.id===cid)) }
 function getUni(cid){ return UNIS[getUniKey(cid)] }
@@ -392,91 +318,58 @@ function initials(n){ return n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join(
 function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'}) }
 function fmtTime(iso){ return new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) }
 function dayKey(iso){ return new Date(iso).toDateString() }
-function saveLoc(){ lsSet('qr_uni_v5', JSON.stringify(DB)) }
-function loadLoc(){ try{const d=lsGet('qr_uni_v5');if(d)DB=JSON.parse(d)}catch(e){} }
+function showAlert(id,msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('on'); }
 
-// ══════════════════════════════════════════
-// JSONBIN CLOUD SYNC
-// ══════════════════════════════════════════
-async function cloudHeaders(){
-  return {'Content-Type':'application/json','X-Master-Key':getAPIKey(),'X-Bin-Versioning':'false'}
-}
-
-async function loadFromCloud(){
-  const key = getAPIKey();
-  if(!key){ loadLoc(); return; }
+// ═══════════════════════════════════
+// SHEETDB — READ & WRITE
+// ═══════════════════════════════════
+async function fetchRows(){
   try{
-    // get or create bin
-    if(!BIN_ID){ BIN_ID = lsGet('qr_binid'); }
-    if(!BIN_ID){
-      // create new bin
-      const res = await fetch(`${JSONBIN_BASE}/b`,{
-        method:'POST',
-        headers:{...(await cloudHeaders()),'X-Bin-Name':'qr-attendance','X-Bin-Private':'true'},
-        body: JSON.stringify({logs:[],students:{}})
-      });
-      if(!res.ok) throw new Error('create failed');
-      const j = await res.json();
-      BIN_ID = j.metadata.id;
-      lsSet('qr_binid', BIN_ID);
-    }
-    const res = await fetch(`${JSONBIN_BASE}/b/${BIN_ID}/latest`,{headers: await cloudHeaders()});
-    if(!res.ok) throw new Error('read failed');
-    const j = await res.json();
-    DB = j.record;
-    saveLoc();
+    const res = await fetch(SHEETDB);
+    if(!res.ok) throw new Error('fetch failed');
+    ROWS = await res.json();
   } catch(e){
-    console.warn('Cloud load failed, using local:', e);
-    loadLoc();
+    console.warn('SheetDB read error:', e);
+    ROWS = [];
   }
 }
 
-async function saveToCloud(){
-  saveLoc();
-  const key = getAPIKey();
-  if(!key || !BIN_ID) return;
-  try{
-    await fetch(`${JSONBIN_BASE}/b/${BIN_ID}`,{
-      method:'PUT',
-      headers: await cloudHeaders(),
-      body: JSON.stringify(DB)
-    });
-  } catch(e){ console.warn('Cloud save failed:', e); }
+async function appendRow(row){
+  // row = { name, course, university, lecture, date, time, timestamp, courseid }
+  const res = await fetch(SHEETDB, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ data: [row] })
+  });
+  if(!res.ok) throw new Error('SheetDB write failed: ' + res.status);
+  return res.json();
 }
 
-// ══════════════════════════════════════════
-// ROUTING — student vs admin
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
+// ROUTING
+// ═══════════════════════════════════
 function route(){
-  const params = new URLSearchParams(window.location.search);
-  const course = params.get('course');
+  const course = new URLSearchParams(window.location.search).get('course');
   if(course && getCourse(course)){
-    // Student view
-    document.getElementById('student-view').style.display='block';
     ciCourse = course;
     const c = getCourse(course);
     const u = getUni(course);
+    document.getElementById('student-view').style.display = 'block';
     document.getElementById('ci-course-icon').textContent = c.icon;
     document.getElementById('ci-course-name').textContent = c.name;
     document.getElementById('ci-course-uni').textContent = u.short + ' Egypt';
-    document.getElementById('ci-lecs').innerHTML = Array.from({length:8},(_,i)=>i+1).map(n=>
-      `<button class="lec-btn" onclick="pickLec(${n},this)">L${n}</button>`).join('');
-    loadFromCloud();
+    document.getElementById('ci-lecs').innerHTML =
+      Array.from({length:8},(_,i)=>i+1)
+        .map(n=>`<button class="lec-btn" onclick="pickLec(${n},this)">L${n}</button>`).join('');
   } else {
-    // Admin view
-    document.getElementById('admin-view').style.display='block';
-    loadFromCloud().then(()=>{
-      renderCards();
-      const k = lsGet('qr_apikey');
-      if(k) document.getElementById('api-key-input').value = k;
-      updateKeyStatus();
-    });
+    document.getElementById('admin-view').style.display = 'block';
+    fetchRows().then(()=>{ renderCards(); });
   }
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 // ADMIN
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 function nav(pg){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('on'));
@@ -486,11 +379,24 @@ function nav(pg){
   if(pg==='report') renderReport();
 }
 
+async function refreshData(pg){
+  const btn = event.target;
+  btn.textContent = '…';
+  btn.disabled = true;
+  await fetchRows();
+  btn.textContent = '↻ Refresh';
+  btn.disabled = false;
+  if(pg==='log') renderLog();
+  if(pg==='report') renderReport();
+}
+
 function renderCards(){
   Object.entries(UNIS).forEach(([uk,u])=>{
     const el = document.getElementById(uk+'-cards');
     el.innerHTML = u.courses.map(c=>{
-      const cnt = Object.values(DB.students).filter(s=>s.courseId===c.id).length;
+      // count unique students for this course from ROWS
+      const names = new Set(ROWS.filter(r=>r.courseid===c.id).map(r=>r.name));
+      const cnt = names.size;
       const isActive = activeCourse===c.id;
       return `<div class="ccard${isActive?' sel':''}" onclick="selectCourse('${c.id}')"
         style="${isActive?`border-color:${c.tc};background:${c.bg}`:''}">
@@ -507,10 +413,11 @@ function selectCourse(cid){
   renderCards();
   const c = getCourse(cid);
   const u = getUni(cid);
-  const cnt = Object.values(DB.students).filter(s=>s.courseId===cid).length;
-  const totalScans = DB.logs.filter(l=>l.courseId===cid).length;
-  const recent = [...DB.logs].filter(l=>l.courseId===cid).reverse().slice(0,4);
+  const courseRows = ROWS.filter(r=>r.courseid===cid);
+  const cnt = new Set(courseRows.map(r=>r.name)).size;
+  const recent = [...courseRows].reverse().slice(0,4);
   const checkinURL = window.location.href.split('?')[0]+'?course='+cid;
+
   document.getElementById('qr-area').innerHTML=`
     <div class="card">
       <div style="font-weight:600;font-size:15px;margin-bottom:1rem">${c.icon} ${c.name} — ${u.short} Egypt</div>
@@ -520,18 +427,21 @@ function selectCourse(cid){
           <div class="kv"><span class="kk">University</span><span class="vv">${u.short} Egypt</span></div>
           <div class="kv"><span class="kk">Course</span><span class="vv">${c.name}</span></div>
           <div class="kv"><span class="kk">Students</span><span class="vv">${cnt}</span></div>
-          <div class="kv"><span class="kk">Scans</span><span class="vv">${totalScans}</span></div>
-          <div class="kv"><span class="kk">URL</span><span class="vv" style="font-size:10px;word-break:break-all;color:var(--text2)">${checkinURL}</span></div>
+          <div class="kv"><span class="kk">Total scans</span><span class="vv">${courseRows.length}</span></div>
           ${recent.length?`<div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Recent scans</div>
-            ${recent.map(l=>`<div class="recent-scan"><span class="rs-name">${l.name}</span><span style="font-size:11px;color:var(--text2)">L${l.lec}</span><span class="rs-time">${fmtTime(l.ts)}</span></div>`).join('')}`:''}
+            ${recent.map(r=>`<div class="recent-scan">
+              <span class="rs-name">${r.name}</span>
+              <span style="font-size:11px;color:var(--text2)">L${r.lecture}</span>
+              <span class="rs-time">${r.time||''}</span>
+            </div>`).join('')}`:''}
           <div class="btn-row">
             <button class="btn btn-p" onclick="dlQR()">⬇ Download QR</button>
             <button class="btn" onclick="copyLink('${cid}')">🔗 Copy link</button>
-            <button class="btn btn-d" onclick="clearCourse()">🗑 Clear</button>
           </div>
         </div>
       </div>
     </div>`;
+
   new QRCode(document.getElementById('qrc-main'),{
     text: checkinURL, width:180, height:180,
     colorDark:'#1a1a18', colorLight:'#ffffff',
@@ -540,73 +450,89 @@ function selectCourse(cid){
 }
 
 function dlQR(){
-  const wrap = document.getElementById('qrc-main');
-  if(!wrap) return;
+  const wrap = document.getElementById('qrc-main'); if(!wrap) return;
   const canvas = wrap.querySelector('canvas');
   if(canvas){ const a=document.createElement('a');a.download=activeCourse+'-qr.png';a.href=canvas.toDataURL('image/png');a.click(); }
 }
 function copyLink(cid){
   const url = window.location.href.split('?')[0]+'?course='+cid;
-  navigator.clipboard.writeText(url).catch(()=>{}).finally(()=>alert('Link copied!\n\nThis is the URL encoded in the QR. Students who scan go straight to the check-in page.'));
-}
-function clearCourse(){
-  if(!activeCourse||!confirm('Clear ALL data for this course?')) return;
-  DB.logs=DB.logs.filter(l=>l.courseId!==activeCourse);
-  Object.keys(DB.students).forEach(k=>{if(DB.students[k].courseId===activeCourse)delete DB.students[k]});
-  saveToCloud(); renderCards();
-  document.getElementById('qr-area').innerHTML='';
-  activeCourse=null;
+  navigator.clipboard.writeText(url).catch(()=>{}).finally(()=>
+    alert('Link copied!\n\nThis is the URL the QR encodes. Students who scan go straight to the check-in page.'));
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 // STUDENT CHECK-IN
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 function pickLec(n,btn){
-  ciLec=n;
+  ciLec = n;
   document.querySelectorAll('.lec-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
 }
 
 async function doCheckin(){
   const name = document.getElementById('ci-name').value.trim();
-  ['ci-err','ci-warn'].forEach(id=>{ const el=document.getElementById(id); el.classList.remove('on'); });
+  ['ci-err','ci-warn'].forEach(id=>document.getElementById(id).classList.remove('on'));
   if(!name){ showAlert('ci-err','Enter your name to continue.'); return; }
   if(!ciLec){ showAlert('ci-err','Select a lecture number.'); return; }
 
   const btn = document.getElementById('ci-submit-btn');
-  btn.disabled=true;
-  btn.innerHTML='<span class="spinner"></span>Saving…';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Saving…';
 
-  // reload fresh data first to avoid overwriting someone else
-  await loadFromCloud();
-
-  const key = ciCourse+'::'+name.toLowerCase().replace(/\s+/g,'_');
-  const already = DB.logs.find(l=>l.key===key && l.lec===ciLec);
-  if(already){
+  // fetch latest rows to check for duplicate
+  await fetchRows();
+  const dup = ROWS.find(r =>
+    r.courseid === ciCourse &&
+    r.lecture === String(ciLec) &&
+    r.name.toLowerCase() === name.toLowerCase()
+  );
+  if(dup){
     btn.disabled=false; btn.textContent='Mark attendance';
-    showAlert('ci-warn',`Already checked in for Lecture ${ciLec} on ${fmtDate(already.ts)} at ${fmtTime(already.ts)}.`);
+    showAlert('ci-warn',`You already checked in for Lecture ${ciLec} on ${dup.date} at ${dup.time}.`);
     return;
   }
 
-  const ts = new Date().toISOString();
-  DB.logs.push({key, courseId:ciCourse, name, lec:ciLec, ts});
-  if(!DB.students[key]) DB.students[key]={name, courseId:ciCourse, key, lecs:[]};
-  if(!DB.students[key].lecs.includes(ciLec)) DB.students[key].lecs.push(ciLec);
-
-  await saveToCloud();
-  btn.disabled=false; btn.textContent='Mark attendance';
-
+  const now = new Date();
   const c = getCourse(ciCourse);
   const u = getUni(ciCourse);
+  const row = {
+    name:        name,
+    course:      c.name,
+    university:  u.short + ' Egypt',
+    lecture:     String(ciLec),
+    date:        fmtDate(now.toISOString()),
+    time:        fmtTime(now.toISOString()),
+    timestamp:   now.toISOString(),
+    courseid:    ciCourse
+  };
+
+  try{
+    await appendRow(row);
+    ROWS.push(row);
+  } catch(e){
+    btn.disabled=false; btn.textContent='Mark attendance';
+    showAlert('ci-err','Could not save. Please try again.');
+    return;
+  }
+
+  btn.disabled=false; btn.textContent='Mark attendance';
+
+  // show success
   document.getElementById('ci-form').style.display='none';
   document.getElementById('ci-success').classList.add('on');
-  document.getElementById('suc-title').textContent='Hi, '+name.split(' ')[0]+'! ✅';
-  document.getElementById('suc-sub').textContent=`Lecture ${ciLec} · ${c.name} · ${u.short} Egypt\n${fmtDate(ts)} at ${fmtTime(ts)}`;
-  const myLecs = DB.students[key].lecs;
-  document.getElementById('suc-att').innerHTML=Array.from({length:8},(_,i)=>i+1).map(n=>{
-    const p=myLecs.includes(n);
-    return `<div class="att-pip" style="background:${p?c.bg:'var(--surface2)'};color:${p?c.tc:'var(--text3)'}">L${n}</div>`;
-  }).join('');
+  document.getElementById('suc-title').textContent = 'Hi, '+name.split(' ')[0]+'! ✅';
+  document.getElementById('suc-sub').textContent =
+    `Lecture ${ciLec} · ${c.name} · ${u.short} Egypt\n${fmtDate(now.toISOString())} at ${fmtTime(now.toISOString())}`;
+
+  // attendance pips — which lectures has this student attended for this course?
+  const myLecs = ROWS
+    .filter(r=>r.courseid===ciCourse && r.name.toLowerCase()===name.toLowerCase())
+    .map(r=>parseInt(r.lecture));
+  document.getElementById('suc-att').innerHTML =
+    Array.from({length:8},(_,i)=>i+1).map(n=>{
+      const p = myLecs.includes(n);
+      return `<div class="att-pip" style="background:${p?c.bg:'var(--surface2)'};color:${p?c.tc:'var(--text3)'}">L${n}</div>`;
+    }).join('');
 }
 
 function resetCI(){
@@ -618,87 +544,122 @@ function resetCI(){
   ['ci-err','ci-warn'].forEach(id=>document.getElementById(id).classList.remove('on'));
 }
 
-function showAlert(id,msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('on'); }
-
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 // LOG
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 function renderLog(){
-  const uniF=document.getElementById('log-uni').value;
-  const courseF=document.getElementById('log-course').value;
-  const lecF=document.getElementById('log-lec').value;
-  const q=(document.getElementById('log-search').value||'').toLowerCase();
-  populateCourseSelect('log-course',uniF,courseF);
-  let logs=[...DB.logs].reverse();
-  if(uniF) logs=logs.filter(l=>getUniKey(l.courseId)===uniF);
-  if(courseF) logs=logs.filter(l=>l.courseId===courseF);
-  if(lecF) logs=logs.filter(l=>l.lec===parseInt(lecF));
-  if(q) logs=logs.filter(l=>l.name.toLowerCase().includes(q));
-  const body=document.getElementById('log-body');
-  if(!logs.length){ body.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div>No entries yet.</div>'; return; }
-  const groups={};
-  logs.forEach(l=>{ const dk=dayKey(l.ts); if(!groups[dk])groups[dk]=[]; groups[dk].push(l); });
-  body.innerHTML=Object.entries(groups).map(([dk,entries])=>`
-    <div class="log-day-label">📅 ${fmtDate(entries[0].ts)} — ${entries.length} scan${entries.length!==1?'s':''}</div>
-    ${entries.map(l=>{
-      const c=getCourse(l.courseId); const u=getUni(l.courseId);
+  const uniF   = document.getElementById('log-uni').value;
+  const courseF= document.getElementById('log-course').value;
+  const lecF   = document.getElementById('log-lec').value;
+  const q      = (document.getElementById('log-search').value||'').toLowerCase();
+  populateCourseSelect('log-course', uniF, courseF);
+
+  let rows = [...ROWS].reverse();
+  if(uniF)    rows = rows.filter(r=>getUniKey(r.courseid)===uniF);
+  if(courseF) rows = rows.filter(r=>r.courseid===courseF);
+  if(lecF)    rows = rows.filter(r=>r.lecture===lecF);
+  if(q)       rows = rows.filter(r=>r.name.toLowerCase().includes(q));
+
+  const body = document.getElementById('log-body');
+  if(!rows.length){
+    body.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div>No entries yet. Hit ↻ Refresh to load latest.</div>';
+    return;
+  }
+
+  // group by date string from sheet
+  const groups = {};
+  rows.forEach(r=>{ const dk=r.date||'Unknown date'; if(!groups[dk])groups[dk]=[]; groups[dk].push(r); });
+
+  body.innerHTML = Object.entries(groups).map(([dk,entries])=>`
+    <div class="log-day-label">📅 ${dk} — ${entries.length} scan${entries.length!==1?'s':''}</div>
+    ${entries.map(r=>{
+      const c = getCourse(r.courseid)||{icon:'📋',name:r.course,bg:'#eee',tc:'#333'};
+      const u = r.university||'';
       return `<div class="log-entry">
-        <div class="log-av" style="background:${c.bg};color:${c.tc}">${initials(l.name)}</div>
+        <div class="log-av" style="background:${c.bg};color:${c.tc}">${initials(r.name)}</div>
         <div style="flex:1;min-width:0">
-          <div class="log-name">${l.name}</div>
-          <div class="log-detail">${c.icon} ${c.name} · ${u.short} Egypt</div>
+          <div class="log-name">${r.name}</div>
+          <div class="log-detail">${c.icon} ${c.name} · ${u}</div>
         </div>
-        <span class="log-lec">L${l.lec}</span>
-        <span class="log-time">${fmtTime(l.ts)}</span>
+        <span class="log-lec">L${r.lecture}</span>
+        <span class="log-time">${r.time||''}</span>
       </div>`;
     }).join('')}`).join('');
 }
-function clearLog(){ if(!confirm('Delete activity log?')) return; DB.logs=[]; saveToCloud(); renderLog(); }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 // REPORT
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 function renderReport(){
-  const uniF=document.getElementById('rep-uni').value;
-  const courseF=document.getElementById('rep-course').value;
-  const q=(document.getElementById('rep-search').value||'').toLowerCase();
-  populateCourseSelect('rep-course',uniF,courseF);
-  let stus=Object.values(DB.students);
-  if(uniF) stus=stus.filter(s=>getUniKey(s.courseId)===uniF);
-  if(courseF) stus=stus.filter(s=>s.courseId===courseF);
-  if(q) stus=stus.filter(s=>s.name.toLowerCase().includes(q));
+  const uniF   = document.getElementById('rep-uni').value;
+  const courseF= document.getElementById('rep-course').value;
+  const q      = (document.getElementById('rep-search').value||'').toLowerCase();
+  populateCourseSelect('rep-course', uniF, courseF);
+
+  let rows = [...ROWS];
+  if(uniF)    rows = rows.filter(r=>getUniKey(r.courseid)===uniF);
+  if(courseF) rows = rows.filter(r=>r.courseid===courseF);
+
+  // build per-student summary
+  const stuMap = {};
+  rows.forEach(r=>{
+    const key = r.courseid+'::'+r.name.toLowerCase();
+    if(!stuMap[key]) stuMap[key]={name:r.name, courseid:r.courseid, lecs:[], entries:[]};
+    const lec = parseInt(r.lecture);
+    if(!stuMap[key].lecs.includes(lec)) stuMap[key].lecs.push(lec);
+    stuMap[key].entries.push(r);
+  });
+
+  let stus = Object.values(stuMap);
+  if(q) stus = stus.filter(s=>s.name.toLowerCase().includes(q));
   stus.sort((a,b)=>b.lecs.length-a.lecs.length);
-  const totalCI=stus.reduce((a,s)=>a+s.lecs.length,0);
-  const avgPct=stus.length?Math.round(stus.reduce((a,s)=>a+s.lecs.length,0)/stus.length/8*100):0;
+
+  const totalCI = stus.reduce((a,s)=>a+s.lecs.length,0);
+  const avgPct  = stus.length ? Math.round(stus.reduce((a,s)=>a+s.lecs.length,0)/stus.length/8*100) : 0;
+
   document.getElementById('rep-stats').innerHTML=`
     <div class="stat"><div class="stat-n">${stus.length}</div><div class="stat-l">Students</div></div>
     <div class="stat"><div class="stat-n">${totalCI}</div><div class="stat-l">Check-ins</div></div>
     <div class="stat"><div class="stat-n">${avgPct}%</div><div class="stat-l">Avg attendance</div></div>
     <div class="stat"><div class="stat-n">${stus.filter(s=>Math.round(s.lecs.length/8*100)<60).length}</div><div class="stat-l">At risk</div></div>`;
-  const body=document.getElementById('rep-body');
-  if(!stus.length){ body.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div>No data yet.</div>'; return; }
-  body.innerHTML=stus.map(s=>{
-    const c=getCourse(s.courseId); const u=getUni(s.courseId);
-    const pct=Math.round(s.lecs.length/8*100);
-    const col=pct>=80?'var(--success)':pct>=60?'var(--warn)':'var(--danger)';
-    const myLogs=DB.logs.filter(l=>l.key===s.key).sort((a,b)=>a.lec-b.lec);
-    const sid='stu_'+s.key.replace(/[^a-z0-9]/gi,'_');
+
+  const body = document.getElementById('rep-body');
+  if(!stus.length){
+    body.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div>No data yet. Hit ↻ Refresh.</div>';
+    return;
+  }
+
+  body.innerHTML = stus.map(s=>{
+    const c   = getCourse(s.courseid)||{icon:'📋',name:s.courseid,bg:'#eee',tc:'#333'};
+    const u   = getUni(s.courseid)||{short:''};
+    const pct = Math.round(s.lecs.length/8*100);
+    const col = pct>=80?'var(--success)':pct>=60?'var(--warn)':'var(--danger)';
+    const sid = 'stu_'+s.courseid.replace(/[^a-z0-9]/gi,'_')+'_'+s.name.replace(/[^a-z0-9]/gi,'_').toLowerCase();
+    const myLogs = [...s.entries].sort((a,b)=>parseInt(a.lecture)-parseInt(b.lecture));
     return `<div>
       <div class="stu-row" onclick="toggleStu('${sid}')">
         <div class="stu-av" style="background:${c.bg};color:${c.tc}">${initials(s.name)}</div>
         <div style="flex:1;min-width:0">
           <div class="stu-name">${s.name}</div>
           <div class="stu-meta">${c.icon} ${c.name} · ${u.short}</div>
-          <div class="stu-pips">${Array.from({length:8},(_,i)=>i+1).map(n=>`<div class="stu-pip" style="background:${s.lecs.includes(n)?c.bg:'var(--surface2)'};color:${s.lecs.includes(n)?c.tc:'var(--text3)'}">${n}</div>`).join('')}</div>
+          <div class="stu-pips">${Array.from({length:8},(_,i)=>i+1).map(n=>`
+            <div class="stu-pip" style="background:${s.lecs.includes(n)?c.bg:'var(--surface2)'};color:${s.lecs.includes(n)?c.tc:'var(--text3)'}">${n}</div>`).join('')}
+          </div>
         </div>
         <span style="font-size:13px;font-weight:700;color:${col};flex-shrink:0">${pct}%</span>
       </div>
       <div class="stu-detail" id="${sid}">
-        ${myLogs.length?myLogs.map(l=>`<div class="de-entry"><span class="de-lec">L${l.lec}</span><span class="de-date">${fmtDate(l.ts)}</span><span class="de-time">${fmtTime(l.ts)}</span></div>`).join(''):'<div style="font-size:12px;color:var(--text2);padding:4px">No history.</div>'}
+        ${myLogs.map(r=>`
+          <div class="de-entry">
+            <span class="de-lec">L${r.lecture}</span>
+            <span class="de-date">${r.date||''}</span>
+            <span class="de-time">${r.time||''}</span>
+          </div>`).join('')}
       </div>
     </div>`;
   }).join('');
 }
+
 function toggleStu(id){
   const el=document.getElementById(id); if(!el) return;
   const open=el.classList.contains('on');
@@ -706,62 +667,25 @@ function toggleStu(id){
   if(!open) el.classList.add('on');
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 // EXPORT
-// ══════════════════════════════════════════
+// ═══════════════════════════════════
 function exportCSV(){
   const rows=[['Name','University','Course','Lecture','Date','Time','Timestamp']];
-  DB.logs.forEach(l=>{ const c=getCourse(l.courseId); const u=getUni(l.courseId);
-    rows.push([l.name,u.name,c.name,'Lecture '+l.lec,fmtDate(l.ts),fmtTime(l.ts),l.ts]); });
-  const csv=rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
-  dl('attendance.csv','data:text/csv;charset=utf-8,'+encodeURIComponent(csv));
+  ROWS.forEach(r=>rows.push([r.name,r.university,r.course,'Lecture '+r.lecture,r.date,r.time,r.timestamp]));
+  const csv=rows.map(r=>r.map(v=>`"${v||''}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.download='attendance.csv';
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.click();
 }
-function exportJSON(){ dl('attendance-backup.json','data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(DB,null,2))); }
-function importJSON(input){
-  const f=input.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=e=>{ try{ DB=JSON.parse(e.target.result); saveToCloud(); renderCards(); document.getElementById('import-ok').classList.add('on'); }
-    catch(err){ document.getElementById('import-err').classList.add('on'); } };
-  r.readAsText(f);
-}
-function nukeAll(){
-  if(!confirm('Delete ALL data?')) return;
-  if(!confirm('Are you sure? This cannot be undone.')) return;
-  DB={logs:[],students:{}}; saveToCloud(); renderCards();
-  document.getElementById('qr-area').innerHTML=''; activeCourse=null;
-}
-function dl(name,url){ const a=document.createElement('a');a.download=name;a.href=url;a.click(); }
+
 function populateCourseSelect(id,uniF,cur){
   const sel=document.getElementById(id);
   const courses=uniF?UNIS[uniF].courses:ALL_COURSES;
-  sel.innerHTML='<option value="">All courses</option>'+courses.map(c=>`<option value="${c.id}">${c.icon} ${c.name} (${getUni(c.id).short})</option>`).join('');
+  sel.innerHTML='<option value="">All courses</option>'+
+    courses.map(c=>`<option value="${c.id}">${c.icon} ${c.name} (${getUni(c.id).short})</option>`).join('');
   if(cur) sel.value=cur;
-}
-
-// ══════════════════════════════════════════
-// SETUP / API KEY
-// ══════════════════════════════════════════
-async function saveAPIKey(){
-  const key=document.getElementById('api-key-input').value.trim();
-  ['key-ok','key-err'].forEach(id=>document.getElementById(id).classList.remove('on'));
-  if(!key){ showAlert('key-err','Paste your API key first.'); return; }
-  lsSet('qr_apikey',key);
-  BIN_ID=null; lsSet('qr_binid','');
-  document.getElementById('key-ok').classList.add('on');
-  document.getElementById('key-ok').textContent='API key saved! Connecting…';
-  await loadFromCloud();
-  if(BIN_ID){
-    document.getElementById('key-ok').textContent='✅ Connected! Cloud sync is active.';
-    updateKeyStatus();
-  } else {
-    document.getElementById('key-err').textContent='Could not connect. Check your API key and try again.';
-    document.getElementById('key-err').classList.add('on');
-  }
-}
-function updateKeyStatus(){
-  const el=document.getElementById('key-status'); if(!el) return;
-  const key=getAPIKey();
-  el.textContent = key ? '✅ Cloud sync active — student scans save automatically.' : '⚠️ No API key set — data only saves on this device.';
 }
 
 // ── boot ──
