@@ -315,8 +315,9 @@ function getCourse(id){ return ALL_COURSES.find(c=>c.id===id) }
 function getUniKey(cid){ return Object.keys(UNIS).find(k=>UNIS[k].courses.find(c=>c.id===cid)) }
 function getUni(cid){ return UNIS[getUniKey(cid)] }
 function initials(n){ return n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase() }
-function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'}) }
-function fmtTime(iso){ return new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) }
+const EGYPT_TZ = 'Africa/Cairo';
+function fmtDate(iso){ return new Date(iso).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:EGYPT_TZ}) }
+function fmtTime(iso){ return new Date(iso).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:EGYPT_TZ}) }
 function dayKey(iso){ return new Date(iso).toDateString() }
 function showAlert(id,msg){ const el=document.getElementById(id); el.textContent=msg; el.classList.add('on'); }
 
@@ -327,7 +328,8 @@ async function fetchRows(){
   try{
     const res = await fetch(SHEETDB);
     if(!res.ok) throw new Error('fetch failed');
-    ROWS = await res.json();
+    const all = await res.json();
+    ROWS = all.filter(r => r.student_name && r.student_name.trim());
   } catch(e){
     console.warn('SheetDB read error:', e);
     ROWS = [];
@@ -341,7 +343,11 @@ async function appendRow(row){
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ data: [row] })
   });
-  if(!res.ok) throw new Error('SheetDB write failed: ' + res.status);
+  const text = await res.text();
+  if(!res.ok) throw new Error('SheetDB write failed: ' + res.status + ' — ' + text);
+  let parsed;
+  try{ parsed = JSON.parse(text); } catch(e){ parsed = text; }
+  return parsed;
   return res.json();
 }
 
@@ -395,7 +401,7 @@ function renderCards(){
     const el = document.getElementById(uk+'-cards');
     el.innerHTML = u.courses.map(c=>{
       // count unique students for this course from ROWS
-      const names = new Set(ROWS.filter(r=>r.courseid===c.id).map(r=>r.name));
+      const names = new Set(ROWS.filter(r=>r.courseid===c.id).map(r=>r.student_name));
       const cnt = names.size;
       const isActive = activeCourse===c.id;
       return `<div class="ccard${isActive?' sel':''}" onclick="selectCourse('${c.id}')"
@@ -414,7 +420,7 @@ function selectCourse(cid){
   const c = getCourse(cid);
   const u = getUni(cid);
   const courseRows = ROWS.filter(r=>r.courseid===cid);
-  const cnt = new Set(courseRows.map(r=>r.name)).size;
+  const cnt = new Set(courseRows.map(r=>r.student_name)).size;
   const recent = [...courseRows].reverse().slice(0,4);
   const checkinURL = window.location.href.split('?')[0]+'?course='+cid;
 
@@ -430,9 +436,9 @@ function selectCourse(cid){
           <div class="kv"><span class="kk">Total scans</span><span class="vv">${courseRows.length}</span></div>
           ${recent.length?`<div style="font-size:11px;color:var(--text2);margin:8px 0 4px">Recent scans</div>
             ${recent.map(r=>`<div class="recent-scan">
-              <span class="rs-name">${r.name}</span>
+              <span class="rs-name">${r.student_name}</span>
               <span style="font-size:11px;color:var(--text2)">L${r.lecture}</span>
-              <span class="rs-time">${r.time||''}</span>
+              <span class="rs-time">${r.scan_time||''}</span>
             </div>`).join('')}`:''}
           <div class="btn-row">
             <button class="btn btn-p" onclick="dlQR()">⬇ Download QR</button>
@@ -484,11 +490,11 @@ async function doCheckin(){
   const dup = ROWS.find(r =>
     r.courseid === ciCourse &&
     r.lecture === String(ciLec) &&
-    r.name.toLowerCase() === name.toLowerCase()
+    r.student_name.toLowerCase() === name.toLowerCase()
   );
   if(dup){
     btn.disabled=false; btn.textContent='Mark attendance';
-    showAlert('ci-warn',`You already checked in for Lecture ${ciLec} on ${dup.date} at ${dup.time}.`);
+    showAlert('ci-warn',`You already checked in for Lecture ${ciLec} on ${dup.scan_date} at ${dup.scan_time}.`);
     return;
   }
 
@@ -496,14 +502,14 @@ async function doCheckin(){
   const c = getCourse(ciCourse);
   const u = getUni(ciCourse);
   const row = {
-    name:        name,
-    course:      c.name,
-    university:  u.short + ' Egypt',
-    lecture:     String(ciLec),
-    date:        fmtDate(now.toISOString()),
-    time:        fmtTime(now.toISOString()),
-    timestamp:   now.toISOString(),
-    courseid:    ciCourse
+    student_name: name,
+    course:       c.name,
+    university:   u.short + ' Egypt',
+    lecture:      String(ciLec),
+    scan_date:    fmtDate(now.toISOString()),
+    scan_time:    fmtTime(now.toISOString()),
+    timestamp:    now.toISOString(),
+    courseid:     ciCourse
   };
 
   try{
@@ -511,7 +517,8 @@ async function doCheckin(){
     ROWS.push(row);
   } catch(e){
     btn.disabled=false; btn.textContent='Mark attendance';
-    showAlert('ci-err','Could not save. Please try again.');
+    showAlert('ci-err','Could not save: ' + e.message);
+    console.error('Checkin error:', e);
     return;
   }
 
@@ -526,7 +533,7 @@ async function doCheckin(){
 
   // attendance pips — which lectures has this student attended for this course?
   const myLecs = ROWS
-    .filter(r=>r.courseid===ciCourse && r.name.toLowerCase()===name.toLowerCase())
+    .filter(r=>r.courseid===ciCourse && r.student_name.toLowerCase()===name.toLowerCase())
     .map(r=>parseInt(r.lecture));
   document.getElementById('suc-att').innerHTML =
     Array.from({length:8},(_,i)=>i+1).map(n=>{
@@ -558,7 +565,7 @@ function renderLog(){
   if(uniF)    rows = rows.filter(r=>getUniKey(r.courseid)===uniF);
   if(courseF) rows = rows.filter(r=>r.courseid===courseF);
   if(lecF)    rows = rows.filter(r=>r.lecture===lecF);
-  if(q)       rows = rows.filter(r=>r.name.toLowerCase().includes(q));
+  if(q)       rows = rows.filter(r=>r.student_name.toLowerCase().includes(q));
 
   const body = document.getElementById('log-body');
   if(!rows.length){
@@ -568,7 +575,7 @@ function renderLog(){
 
   // group by date string from sheet
   const groups = {};
-  rows.forEach(r=>{ const dk=r.date||'Unknown date'; if(!groups[dk])groups[dk]=[]; groups[dk].push(r); });
+  rows.forEach(r=>{ const dk=r.scan_date||'Unknown date'; if(!groups[dk])groups[dk]=[]; groups[dk].push(r); });
 
   body.innerHTML = Object.entries(groups).map(([dk,entries])=>`
     <div class="log-day-label">📅 ${dk} — ${entries.length} scan${entries.length!==1?'s':''}</div>
@@ -576,13 +583,13 @@ function renderLog(){
       const c = getCourse(r.courseid)||{icon:'📋',name:r.course,bg:'#eee',tc:'#333'};
       const u = r.university||'';
       return `<div class="log-entry">
-        <div class="log-av" style="background:${c.bg};color:${c.tc}">${initials(r.name)}</div>
+        <div class="log-av" style="background:${c.bg};color:${c.tc}">${initials(r.student_name)}</div>
         <div style="flex:1;min-width:0">
-          <div class="log-name">${r.name}</div>
+          <div class="log-name">${r.student_name}</div>
           <div class="log-detail">${c.icon} ${c.name} · ${u}</div>
         </div>
         <span class="log-lec">L${r.lecture}</span>
-        <span class="log-time">${r.time||''}</span>
+        <span class="log-time">${r.scan_time||''}</span>
       </div>`;
     }).join('')}`).join('');
 }
@@ -603,8 +610,8 @@ function renderReport(){
   // build per-student summary
   const stuMap = {};
   rows.forEach(r=>{
-    const key = r.courseid+'::'+r.name.toLowerCase();
-    if(!stuMap[key]) stuMap[key]={name:r.name, courseid:r.courseid, lecs:[], entries:[]};
+    const key = r.courseid+'::'+r.student_name.toLowerCase();
+    if(!stuMap[key]) stuMap[key]={name:r.student_name, courseid:r.courseid, lecs:[], entries:[]};
     const lec = parseInt(r.lecture);
     if(!stuMap[key].lecs.includes(lec)) stuMap[key].lecs.push(lec);
     stuMap[key].entries.push(r);
@@ -652,8 +659,8 @@ function renderReport(){
         ${myLogs.map(r=>`
           <div class="de-entry">
             <span class="de-lec">L${r.lecture}</span>
-            <span class="de-date">${r.date||''}</span>
-            <span class="de-time">${r.time||''}</span>
+            <span class="de-date">${r.scan_date||''}</span>
+            <span class="de-time">${r.scan_time||''}</span>
           </div>`).join('')}
       </div>
     </div>`;
@@ -672,7 +679,7 @@ function toggleStu(id){
 // ═══════════════════════════════════
 function exportCSV(){
   const rows=[['Name','University','Course','Lecture','Date','Time','Timestamp']];
-  ROWS.forEach(r=>rows.push([r.name,r.university,r.course,'Lecture '+r.lecture,r.date,r.time,r.timestamp]));
+  ROWS.forEach(r=>rows.push([r.student_name,r.university,r.course,'Lecture '+r.lecture,r.scan_date,r.scan_time,r.timestamp]));
   const csv=rows.map(r=>r.map(v=>`"${v||''}"`).join(',')).join('\n');
   const a=document.createElement('a');
   a.download='attendance.csv';
